@@ -1,6 +1,8 @@
 Todo:
-- add list of days with all time
-- collect all days in one week and show total result of the week
+- add the list of days with all time
+- collect all days in one week and show the total result of the week
 
 Future Plans:
--create functionality for send email with total time of week
+-create functionality for sending emails with the total time of the week
+-in one window get all users and make small competitions with time
+-add benefits and different statuses according to the time length
