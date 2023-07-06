@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { request } from "../utils/axios-utils";
 
 const fetchAllUsers = () => {
@@ -6,9 +6,9 @@ const fetchAllUsers = () => {
 };
 
 export const useAllUsersData = () => {
-  const { isLoading, isError, data, error } = useQuery(
-    "allUsers",
-    fetchAllUsers
-  );
+  const { isLoading, data, error } = useQuery({
+    queryKey: ["getAllUsers"],
+    queryFn: fetchAllUsers,
+  });
   return data;
 };
