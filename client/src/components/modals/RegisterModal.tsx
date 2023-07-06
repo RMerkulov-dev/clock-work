@@ -2,11 +2,12 @@ import React, { useCallback, useState } from "react";
 import { Input, Modal } from "../index";
 import { useRegisterModal } from "../../hooks/useRegisterModal";
 import { useLoginModal } from "../../hooks/useLoginModal";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { BASE_URL } from "../../utils/axios-utils";
 import Heading from "../Heading";
+import { useMutation } from "@tanstack/react-query";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
@@ -24,10 +25,12 @@ const RegisterModal = () => {
       password: "",
     },
   });
-
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    axios
-      .post(`${BASE_URL}/auth/register`, data)
+  const registerUserMutation = useMutation((data) =>
+    axios.post(`${BASE_URL}/auth/register`, data)
+  );
+  const onSubmit = (data: any) => {
+    registerUserMutation
+      .mutateAsync(data)
       .then(() => {
         toast.success("Success!");
         registerModal.onClose();
@@ -39,7 +42,6 @@ const RegisterModal = () => {
         console.log(err);
       })
       .finally(() => {
-        // toast.success("User created");
         setIsLoading(false);
       });
   };
