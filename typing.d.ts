@@ -1,5 +1,6 @@
 import React from "react";
 import {IconType} from "react-icons";
+import {FieldErrors, FieldValues} from "react-hook-form";
 
 interface ModalStore{
     isOpen:boolean;
@@ -29,3 +30,19 @@ interface ModalProps{
     secondaryActionLabel?: string;
 }
 
+interface InputProps {
+    id: string;
+    label: string;
+    type?: string;
+    disabled?: boolean;
+    formatPrice?: boolean;
+    required?: boolean;
+    register: UseFormRegister<FieldValues>;
+    errors: FieldErrors;
+}
+
+interface HeadingProps {
+    title: string;
+    subtitle?: string;
+    center?: boolean;
+}

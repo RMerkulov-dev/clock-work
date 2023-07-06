@@ -12,3 +12,5 @@ export const request = <T>({ ...options }: AxiosRequestConfig) => {
 
   return client(options).then(onSuccess).catch(onError);
 };
+
+export const BASE_URL = "http://localhost:8080";
