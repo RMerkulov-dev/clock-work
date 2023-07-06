@@ -41,7 +41,7 @@ app.put("/users/:userId/total-time", updateTotalTime);
 //get the total time of user
 app.get("/users/:userId/total-time", getTotalTime);
 //get all users
-app.get("/users", checkAuth, getAllUsers);
+app.get("/users", getAllUsers);
 
 //CONNECT TO DB
 mongoose
