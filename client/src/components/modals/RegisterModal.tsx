@@ -32,6 +32,7 @@ const RegisterModal = () => {
         toast.success("Success!");
         registerModal.onClose();
         loginModal.onOpen();
+        console.log(data);
       })
       .catch((err) => {
         toast.error("Something went wrong");
@@ -60,7 +61,7 @@ const RegisterModal = () => {
         required
       />
       <Input
-        id="name"
+        id="fullName"
         label="Name"
         disabled={isLoading}
         register={register}
