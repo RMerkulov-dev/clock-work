@@ -1,6 +1,6 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
-const client = axios.create({ baseURL: "http://localhost:8000" });
+const client = axios.create({ baseURL: "http://localhost:8080" });
 
 export const request = <T>({ ...options }: AxiosRequestConfig) => {
   client.defaults.headers.common.Authorization = `Bearer token`;

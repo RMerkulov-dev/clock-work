@@ -1,11 +1,11 @@
 import React from "react";
-import { Button } from "../components";
+import RegisterModal from "../components/modals/RegisterModal";
 
 const handleClick = () => {};
 const MainPage = () => {
   return (
     <div className="container bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
-      <Button label="Button" onClick={handleClick} />
+      <RegisterModal />
     </div>
   );
 };
