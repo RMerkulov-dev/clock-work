@@ -5,12 +5,11 @@ export default {
     extend: {
       container: {
         center: true,
-        maxWidth: {
-          xs: "340px",
-          sm: "440px",
-          md: "768px",
-          lg: "1024px",
-          xl: "1245px",
+        maxWidth: "100%",
+      },
+      colors: {
+        custom: {
+          500: "#290536", // Add the desired color value
         },
       },
       screens: {

@@ -4,19 +4,23 @@ import { useRegisterModal } from "../hooks/useRegisterModal";
 import { useLoginModal } from "../hooks/useLoginModal";
 import { Button } from "../components";
 import RegisterModal from "../components/modals/RegisterModal";
+import LoginModal from "../components/modals/LoginModal";
 
 const MainPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
 
-  const handleClick = () => {
+  const handleLoginOpen = () => {
+    loginModal.onOpen();
+  };
+  const handleRegisterOpen = () => {
     registerModal.onOpen();
   };
 
   return (
     <>
-      <div className="container p-3 bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg h-screen  ">
+      <div className="container  p-3 bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg  h-screen  ">
         <div className="flex items-center justify-between flex-col h-full">
           <div className="">
             <h1 className="text-center font-bold text-gray-300 text-2xl">
@@ -32,15 +36,16 @@ const MainPage = () => {
           </div>
           <ul className="flex items-center justify-center flex-col gap-4 w-full ">
             <li className="w-full">
-              <Button label="Log in" onClick={handleClick} />
+              <Button label="Log in" onClick={handleLoginOpen} />
             </li>
             <li className="w-full">
-              <Button label="Register" onClick={handleClick} />
+              <Button label="Register" onClick={handleRegisterOpen} />
             </li>
           </ul>
         </div>
       </div>
       <RegisterModal />
+      <LoginModal />
     </>
   );
 };

@@ -1,15 +1,15 @@
 import React, { useCallback, useState } from "react";
-import { Input, Modal } from "../index";
 import { useRegisterModal } from "../../hooks/useRegisterModal";
 import { useLoginModal } from "../../hooks/useLoginModal";
 import { FieldValues, useForm } from "react-hook-form";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { BASE_URL } from "../../utils/axios-utils";
-import Heading from "../Heading";
 import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { BASE_URL } from "../../utils/axios-utils";
+import toast from "react-hot-toast";
+import Heading from "../Heading";
+import { Input, Modal } from "../index";
 
-const RegisterModal = () => {
+const LoginModal = () => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
@@ -20,16 +20,16 @@ const RegisterModal = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      fullName: "",
       email: "",
       password: "",
     },
   });
-  const registerUserMutation = useMutation((data) =>
-    axios.post(`${BASE_URL}/auth/register`, data)
+
+  const loginUserMutation = useMutation((data) =>
+    axios.post(`${BASE_URL}/auth/login`, data)
   );
   const onSubmit = (data: any) => {
-    registerUserMutation
+    loginUserMutation
       .mutateAsync(data)
       .then(() => {
         toast.success("Success!");
@@ -43,19 +43,20 @@ const RegisterModal = () => {
       })
       .finally(() => {
         setIsLoading(false);
-        registerModal.onClose();
-        loginModal.onOpen();
       });
   };
 
   const toggle = useCallback(() => {
-    registerModal.onClose();
-    loginModal.onOpen();
+    loginModal.onClose();
+    registerModal.onOpen();
   }, [loginModal, registerModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title="Welcome to ClockWork" subtitle="Create an account" />
+      <Heading
+        title="Welcome to ClockWork"
+        subtitle="Please Log in to your account"
+      />
       <Input
         id="email"
         label="Email"
@@ -64,14 +65,7 @@ const RegisterModal = () => {
         errors={errors}
         required
       />
-      <Input
-        id="fullName"
-        label="Name"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
+
       <Input
         id="password"
         type="password"
@@ -87,7 +81,7 @@ const RegisterModal = () => {
   const footerContent = (
     <div>
       <p>
-        Already have an account?
+        First time using ClockWork?
         <span
           onClick={toggle}
           className="
@@ -97,7 +91,7 @@ const RegisterModal = () => {
             "
         >
           {" "}
-          Log in
+          Register
         </span>
       </p>
     </div>
@@ -107,10 +101,10 @@ const RegisterModal = () => {
     <>
       <Modal
         disabled={isLoading}
-        isOpen={registerModal.isOpen}
-        title="Register"
+        isOpen={loginModal.isOpen}
+        title="Log in"
         actionLabel="Continue"
-        onClose={registerModal.onClose}
+        onClose={loginModal.onClose}
         onSubmit={handleSubmit(onSubmit)}
         body={bodyContent}
         footer={footerContent}
@@ -119,4 +113,4 @@ const RegisterModal = () => {
   );
 };
 
-export default RegisterModal;
+export default LoginModal;
