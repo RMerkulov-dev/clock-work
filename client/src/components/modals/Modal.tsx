@@ -13,7 +13,7 @@ const Modal = ({
   actionLabel,
   disabled,
   secondaryAction,
-  secondaryActionLabel,
+  footer,
 }: ModalProps) => {
   const [showModal, setShowModal] = useState(isOpen);
 
@@ -64,7 +64,7 @@ const Modal = ({
         <Dialog.Panel
           className=" container bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg p-4  relative
           w-full
-
+          h-screen
           mx-auto
           my-auto
           flex items-center justify-start flex-col"
@@ -79,19 +79,13 @@ const Modal = ({
           />
 
           <div>{body}</div>
-          {secondaryAction && secondaryActionLabel && (
-            <Button
-              disabled={disabled}
-              label={secondaryActionLabel}
-              onClick={handleSecondaryAction}
-              outline
-            />
-          )}
+
           <Button
             disabled={disabled}
             label={actionLabel}
             onClick={handleSubmit}
           />
+          <div>{footer}</div>
         </Dialog.Panel>
       </Dialog>
     </Transition>

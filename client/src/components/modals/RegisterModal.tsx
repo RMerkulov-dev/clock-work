@@ -82,6 +82,25 @@ const RegisterModal = () => {
     </div>
   );
 
+  const footerContent = (
+    <div>
+      <p>
+        Already have an account?
+        <span
+          onClick={toggle}
+          className="
+              text-neutral-800
+              cursor-pointer
+              hover:underline
+            "
+        >
+          {" "}
+          Log in
+        </span>
+      </p>
+    </div>
+  );
+
   return (
     <>
       <Modal
@@ -92,6 +111,7 @@ const RegisterModal = () => {
         onClose={registerModal.onClose}
         onSubmit={handleSubmit(onSubmit)}
         body={bodyContent}
+        footer={footerContent}
       />
     </>
   );

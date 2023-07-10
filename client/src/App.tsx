@@ -4,14 +4,19 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { routes } from "./helpers/routes";
 import { MainPage } from "./pages";
 import ToasterProvider from "./providers/ToastProvider";
+import TimesPage from "./pages/TimesPage";
 
 const queryClient = new QueryClient();
 const App = () => {
-  const { home } = routes;
+  const { home, times } = routes;
   const router = createBrowserRouter([
     {
       path: home,
       element: <MainPage />,
+    },
+    {
+      path: times,
+      element: <TimesPage />,
     },
   ]);
 
