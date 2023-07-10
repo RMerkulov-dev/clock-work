@@ -2,7 +2,7 @@ import axios from "axios";
 import { UserTotalTime } from "../../../typing";
 import { BASE_URL } from "../utils/axios-utils";
 
-export const fetchUserTotalTime = async (
+export const getUserTotalTime = async (
   userId: string
 ): Promise<UserTotalTime> => {
   try {

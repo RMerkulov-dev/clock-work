@@ -1,6 +1,6 @@
 import { UserTotalTime } from "../../../typing";
 import { useQuery } from "@tanstack/react-query";
-import { fetchUserTotalTime } from "../services/getUserTotalTime";
+import { getUserTotalTime } from "../services/getUserTotalTime";
 
 export const useUserTotalTime = (
   userId: string
@@ -12,7 +12,7 @@ export const useUserTotalTime = (
 } => {
   const { data, isLoading, isError, error } = useQuery<UserTotalTime, Error>(
     ["userTotalTime", userId],
-    () => fetchUserTotalTime(userId)
+    () => getUserTotalTime(userId)
   );
 
   return { data, isLoading, isError, error };
