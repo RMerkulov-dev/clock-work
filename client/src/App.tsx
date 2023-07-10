@@ -10,6 +10,7 @@ import { MainPage } from "./pages";
 const queryClient = new QueryClient();
 const App = () => {
   const isLogin = useAuth();
+  console.log(isLogin);
 
   const { home, times } = routes;
 
