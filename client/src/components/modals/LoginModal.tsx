@@ -10,13 +10,14 @@ import Heading from "../Heading";
 import { Input, Modal } from "../index";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../helpers/routes";
+import { useAuth } from "../../hooks/useAuth";
 
 const LoginModal = () => {
   const navigate = useNavigate();
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const isLogin = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-
   const { times } = routes;
 
   const {
@@ -41,6 +42,7 @@ const LoginModal = () => {
         registerModal.onClose();
         loginModal.onOpen();
         console.log(data);
+        isLogin.onLogin();
         navigate(times);
       })
       .catch((err) => {

@@ -2,13 +2,17 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { routes } from "./helpers/routes";
-import { MainPage } from "./pages";
 import ToasterProvider from "./providers/ToastProvider";
 import TimesPage from "./pages/TimesPage";
+import { useAuth } from "./hooks/useAuth";
+import { MainPage } from "./pages";
 
 const queryClient = new QueryClient();
 const App = () => {
+  const isLogin = useAuth();
+
   const { home, times } = routes;
+
   const router = createBrowserRouter([
     {
       path: home,
@@ -16,7 +20,7 @@ const App = () => {
     },
     {
       path: times,
-      element: <TimesPage />,
+      element: isLogin ? <TimesPage /> : <MainPage />,
     },
   ]);
 

@@ -30,6 +30,12 @@ interface ModalProps{
     secondaryActionLabel?: string;
 }
 
+interface AuthProps{
+    isLogin:boolean;
+    onLogin:()=>void;
+    onLogout:()=>void;
+}
+
 interface InputProps {
     id: string;
     label: string;
