@@ -8,11 +8,16 @@ import { BASE_URL } from "../../utils/axios-utils";
 import toast from "react-hot-toast";
 import Heading from "../Heading";
 import { Input, Modal } from "../index";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../helpers/routes";
 
 const LoginModal = () => {
+  const navigate = useNavigate();
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
+
+  const { times } = routes;
 
   const {
     register,
@@ -36,6 +41,7 @@ const LoginModal = () => {
         registerModal.onClose();
         loginModal.onOpen();
         console.log(data);
+        navigate(times);
       })
       .catch((err) => {
         toast.error("Something went wrong");
@@ -43,6 +49,7 @@ const LoginModal = () => {
       })
       .finally(() => {
         setIsLoading(false);
+        loginModal.onClose();
       });
   };
 
