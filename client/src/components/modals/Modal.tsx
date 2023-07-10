@@ -60,7 +60,7 @@ const Modal = ({
       leaveFrom="transform scale-100 opacity-100"
       leaveTo="transform scale-95 opacity-0"
     >
-      <Dialog as="div" onClose={() => {}}>
+      <Dialog as="div" className="relative z-10" onClose={() => {}}>
         <Dialog.Panel
           className=" container bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg p-4  relative
           w-full

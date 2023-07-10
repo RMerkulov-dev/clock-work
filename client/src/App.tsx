@@ -24,6 +24,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <ToasterProvider />
+
       <RouterProvider router={router} />
     </QueryClientProvider>
   );
