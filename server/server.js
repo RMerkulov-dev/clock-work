@@ -13,7 +13,6 @@ import {
   login,
   register,
 } from "./controllers/UserController.js";
-import checkAuth from "./utils/checkAuth.js";
 import { getTotalTime, updateTotalTime } from "./controllers/TimeController.js";
 
 const app = express();
@@ -35,7 +34,7 @@ app.post(
 //login user
 app.post("/auth/login", loginValidation, handleValidationErrors, login);
 //get user info
-app.get("/auth/me", checkAuth, getMe);
+app.get("/auth/me", getMe);
 //add user total time
 app.put("/users/:userId/total-time", updateTotalTime);
 //get the total time of user

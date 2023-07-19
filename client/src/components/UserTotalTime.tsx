@@ -1,17 +1,36 @@
-import React from "react";
-import { useUserTotalTime } from "../hooks/useUserTotalTime";
+import React, { useEffect } from "react";
+import { useAuthStore } from "../stores/authStore";
+import { useCurrentUserTotalTime } from "../services/getUserTotalTime";
+import { setUserHeader } from "../utils/axios-utils";
 
-const UserTotalTime = ({ userId }: { userId: string }) => {
-  const { data, isLoading, isError, error } = useUserTotalTime(userId);
+const UserTotalTime = () => {
+  const { userId, token } = useAuthStore();
+  console.log(userId);
+
+  useEffect(() => {
+    setUserHeader(token); // Make sure to set the token in the headers when it changes
+  }, [token]);
+
+  // @ts-ignore
+  const { data, isLoading, isError, error } = useCurrentUserTotalTime(userId);
+
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <div>Loading...</div>;
   }
 
   if (isError) {
-    return <p>Error: {error?.message}</p>;
+    return <div>Error: {error?.message}</div>;
   }
 
-  return <p>User Total Time: {data?.totalTime}</p>;
+  const totalTime = data?.totalTime;
+
+  return (
+    <div>
+      <h1>User Profile</h1>
+      <p>Total Time: {totalTime}</p>
+      {/* Render other user information */}
+    </div>
+  );
 };
 
 export default UserTotalTime;

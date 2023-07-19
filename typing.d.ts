@@ -56,3 +56,12 @@ interface HeadingProps {
 interface UserTotalTime {
     totalTime: number;
 }
+
+export interface AuthState {
+    userId: string | null;
+    token: string | null;
+    setUserId: (userId: string | null,token:string|null) => void;
+
+}
+
+

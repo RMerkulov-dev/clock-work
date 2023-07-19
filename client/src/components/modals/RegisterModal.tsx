@@ -7,11 +7,13 @@ import toast from "react-hot-toast";
 import { apiClient } from "../../utils/axios-utils";
 import Heading from "../Heading";
 import { useMutation } from "@tanstack/react-query";
+import { useAuthStore } from "../../stores/authStore";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
+  const setUserId = useAuthStore((state) => state.setUserId);
 
   const {
     register,
@@ -30,7 +32,11 @@ const RegisterModal = () => {
   const onSubmit = (data: any) => {
     registerUserMutation
       .mutateAsync(data)
-      .then(() => {
+      .then((response) => {
+        const userId = response.data._id;
+        const token = response.data.token;
+        setUserId(userId, token);
+        console.log("userId", userId);
         toast.success("Success!");
         registerModal.onClose();
         loginModal.onOpen();
