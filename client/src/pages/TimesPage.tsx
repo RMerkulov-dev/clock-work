@@ -17,7 +17,7 @@ const TimesPage = () => {
       </div>
       <div>
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
-          <UserTotalTime userId={"64abb490ca1456af04d9fbcf"} />
+          <UserTotalTime />
         </div>
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
           This week

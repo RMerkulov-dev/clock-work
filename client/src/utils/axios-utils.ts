@@ -1,16 +1,15 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios from "axios";
 
-const client = axios.create({ baseURL: "http://localhost:8080" });
+const BASE_URL = "http://localhost:3002";
 
-export const request = <T>({ ...options }: AxiosRequestConfig) => {
-  client.defaults.headers.common.Authorization = `Bearer token`;
+const apiClient = axios.create({ baseURL: BASE_URL });
 
-  const onSuccess = (response: AxiosResponse<T>) => response;
-  const onError = (error: AxiosError<T>) => {
-    return error;
-  };
-
-  return client(options).then(onSuccess).catch(onError);
+export const setUserIdHeader = (userId: string | null) => {
+  if (userId) {
+    apiClient.defaults.headers.common["Authorization"] = `Bearer ${userId}`;
+  } else {
+    delete apiClient.defaults.headers.common["Authorization"];
+  }
 };
 
-export const BASE_URL = "http://localhost:3001";
+export { BASE_URL, apiClient };

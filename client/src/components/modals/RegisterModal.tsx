@@ -3,9 +3,8 @@ import { Input, Modal } from "../index";
 import { useRegisterModal } from "../../hooks/useRegisterModal";
 import { useLoginModal } from "../../hooks/useLoginModal";
 import { FieldValues, useForm } from "react-hook-form";
-import axios from "axios";
 import toast from "react-hot-toast";
-import { BASE_URL } from "../../utils/axios-utils";
+import { apiClient } from "../../utils/axios-utils";
 import Heading from "../Heading";
 import { useMutation } from "@tanstack/react-query";
 
@@ -26,7 +25,7 @@ const RegisterModal = () => {
     },
   });
   const registerUserMutation = useMutation((data) =>
-    axios.post(`${BASE_URL}/auth/register`, data)
+    apiClient.post("/auth/register", data)
   );
   const onSubmit = (data: any) => {
     registerUserMutation

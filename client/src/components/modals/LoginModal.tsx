@@ -3,8 +3,7 @@ import { useRegisterModal } from "../../hooks/useRegisterModal";
 import { useLoginModal } from "../../hooks/useLoginModal";
 import { FieldValues, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import { BASE_URL } from "../../utils/axios-utils";
+import { apiClient } from "../../utils/axios-utils";
 import toast from "react-hot-toast";
 import Heading from "../Heading";
 import { Input, Modal } from "../index";
@@ -32,7 +31,7 @@ const LoginModal = () => {
   });
 
   const loginUserMutation = useMutation((data) =>
-    axios.post(`${BASE_URL}/auth/login`, data)
+    apiClient.post("/auth/login", data)
   );
   const onSubmit = (data: any) => {
     loginUserMutation
@@ -42,6 +41,7 @@ const LoginModal = () => {
         registerModal.onClose();
         loginModal.onOpen();
         console.log(data);
+        // @ts-ignore
         isLogin.onLogin();
         navigate(times);
       })
