@@ -3,7 +3,8 @@ import User from "../models/User.js";
 // Function to update the total time for a user
 export const updateTotalTime = async (req, res) => {
   try {
-    const { userId, totalTime } = req.params;
+    const { userId } = req.params;
+    const { totalTime } = req.body;
 
     //Find the user by userId
     const user = await User.findById(userId);

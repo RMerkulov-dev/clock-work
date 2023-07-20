@@ -10,6 +10,7 @@ import { Input, Modal } from "../index";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../helpers/routes";
 import { useAuth } from "../../hooks/useAuth";
+import { useAuthStore } from "../../stores/authStore";
 
 const LoginModal = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const LoginModal = () => {
   const isLogin = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { times } = routes;
+  const setUserId = useAuthStore((state) => state.setUserId);
 
   const {
     register,
@@ -36,7 +38,10 @@ const LoginModal = () => {
   const onSubmit = (data: any) => {
     loginUserMutation
       .mutateAsync(data)
-      .then(() => {
+      .then((response) => {
+        const userId = response.data._id;
+        const token = response.data.token;
+        setUserId(userId, token);
         toast.success("Success!");
         registerModal.onClose();
         loginModal.onOpen();
