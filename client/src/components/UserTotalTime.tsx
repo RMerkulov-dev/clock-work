@@ -1,21 +1,12 @@
 import React, { useEffect } from "react";
 import { useAuthStore } from "../stores/authStore";
-import { apiClient, setUserHeader } from "../utils/axios-utils";
+import { setUserHeader } from "../utils/axios-utils";
 import { useQuery } from "@tanstack/react-query";
 import { TotalTime } from "../../../typing";
-
-const getTotalTime = async (userId: string | null) => {
-  if (!userId) {
-    return null;
-  }
-
-  const res = await apiClient.get(`/users/${userId}/total-time`);
-  return res.data;
-};
+import { getTotalTime } from "../services/getUserTotalTime";
 
 const UserTotalTime = () => {
   const { userId, token } = useAuthStore();
-  console.log(userId);
 
   useEffect(() => {
     setUserHeader(token);
