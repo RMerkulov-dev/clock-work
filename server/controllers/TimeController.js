@@ -25,8 +25,8 @@ export const updateTotalTime = async (req, res) => {
 // Function to get the total time for a user
 export const getTotalTime = async (req, res) => {
   try {
-    const { userId } = req.body;
-
+    const userId = req.params.userId; // Use req.params to get the userId
+    console.log(userId);
     // Find the user by userId
     const user = await User.findById(userId);
 

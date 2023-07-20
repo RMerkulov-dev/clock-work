@@ -53,7 +53,7 @@ interface HeadingProps {
     center?: boolean;
 }
 
-interface UserTotalTime {
+interface TotalTime {
     totalTime: number;
 }
 
