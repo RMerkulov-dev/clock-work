@@ -16,46 +16,70 @@ const AddTimes = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      totalTime: "",
+      startTime: "",
+      endTime: "",
     },
   });
 
-  const updateTotalTimeMutation = useMutation(
-    (data: FieldValues) => updateTotalTime(userId, data.totalTime),
-    {
-      onSuccess: (data: number) => {
-        queryClient.invalidateQueries(["totalTime", userId]);
-        reset();
-      },
-    }
-  );
-
   const onSubmit = async (data: FieldValues) => {
     try {
-      await updateTotalTimeMutation.mutateAsync(data);
+      const { startTime, endTime } = data;
+
+      // Convert start and end time to minutes
+      const startTimeInMinutes = convertTimeToMinutes(startTime);
+      const endTimeInMinutes = convertTimeToMinutes(endTime);
+
+      // Calculate the total time in minutes
+      const totalTime = endTimeInMinutes - startTimeInMinutes;
+
+      // Update the total time on the server
+      await updateTotalTimeMutation.mutateAsync(totalTime);
+      reset(); // Reset the form after successful submission
     } catch (err) {
       console.log(err);
     }
   };
 
-  const updateTotalTime = async (userId: string | null, data: FieldValues) => {
+  const updateTotalTimeMutation = useMutation(
+    (totalTime: number) => updateTotalTime(userId, totalTime),
+    {
+      onSuccess: (data: any) => {
+        queryClient.invalidateQueries(["totalTime", userId]);
+      },
+    }
+  );
+
+  const updateTotalTime = async (userId: string | null, totalTime: number) => {
     if (!userId) {
       return null;
     }
 
     const res = await apiClient.put(`/users/${userId}/total-time`, {
-      totalTime: data,
+      totalTime,
     });
     return res.data;
+  };
+
+  const convertTimeToMinutes = (time: string) => {
+    const [hours, minutes] = time.split(":");
+    return parseInt(hours) * 60 + parseInt(minutes);
   };
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
-          id="totalTime"
-          label="Total Time"
-          type="number"
+          id="startTime"
+          label="Start Time (hh:mm)"
+          type="time"
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="endTime"
+          label="End Time (hh:mm)"
+          type="time"
           register={register}
           errors={errors}
           required
