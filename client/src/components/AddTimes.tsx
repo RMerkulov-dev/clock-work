@@ -1,15 +1,18 @@
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { apiClient } from "../utils/axios-utils";
-import { Button, Input } from "./index";
+import { Input } from "./index";
 import { useAuthStore } from "../stores/authStore";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const AddTimes = () => {
   const { userId } = useAuthStore();
+  const queryClient = useQueryClient();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
@@ -17,15 +20,25 @@ const AddTimes = () => {
     },
   });
 
-  const onSubmit = async (data: any) => {
+  const updateTotalTimeMutation = useMutation(
+    (data: FieldValues) => updateTotalTime(userId, data.totalTime),
+    {
+      onSuccess: (data: number) => {
+        queryClient.invalidateQueries(["totalTime", userId]);
+        reset();
+      },
+    }
+  );
+
+  const onSubmit = async (data: FieldValues) => {
     try {
-      await updateTotalTime(userId, data.totalTime);
+      await updateTotalTimeMutation.mutateAsync(data);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const updateTotalTime = async (userId: string | null, data: number) => {
+  const updateTotalTime = async (userId: string | null, data: FieldValues) => {
     if (!userId) {
       return null;
     }
@@ -38,16 +51,16 @@ const AddTimes = () => {
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Input
-          id="totalTime" // Use "totalTime" instead of "time" to match the data field
+          id="totalTime"
           label="Total Time"
-          type="number" // Assuming you want to enter a numeric value for total time
+          type="number"
           register={register}
           errors={errors}
           required
         />
-        <Button onClick={handleSubmit(onSubmit)} label="Update  time"></Button>
+        <button type="submit">Update Time</button>
       </form>
     </>
   );
