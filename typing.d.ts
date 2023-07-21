@@ -64,4 +64,12 @@ export interface AuthState {
 
 }
 
+type Interval={
+    _id:string,
+    startTime:string,
+    endTime:string
+}
 
+export interface IntervalsProps{
+intervals:Interval[]
+}

@@ -1,9 +1,15 @@
+// UserTotalTime.tsx
 import React, { useEffect } from "react";
 import { useAuthStore } from "../stores/authStore";
 import { setUserHeader } from "../utils/axios-utils";
-import { useQuery } from "@tanstack/react-query";
-import { TotalTime } from "../../../typing";
-import { getTotalTime } from "../services/getUserTotalTime";
+import useGetTotalTime from "../hooks/useGetTotalTime";
+import toast from "react-hot-toast";
+
+const formatTime = (date: any) => {
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${hours}:${minutes}`;
+};
 
 const UserTotalTime = () => {
   const { userId, token } = useAuthStore();
@@ -12,26 +18,36 @@ const UserTotalTime = () => {
     setUserHeader(token);
   }, [token]);
 
-  const { data, isLoading, isError, error } = useQuery<TotalTime>(
-    ["totalTime", userId],
-    () => getTotalTime(userId)
-  );
+  if (!userId) {
+    return toast.error("No ID available");
+  }
+
+  const { data, isLoading, error } = useGetTotalTime(userId);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (isError) {
+  if (error) {
     // @ts-ignore
-    return <div>Error: {error?.message}</div>;
+    return toast.error("Error loading");
   }
 
-  const totalTime = data?.totalTime;
+  if (!data || data.intervals.length === 0) {
+    return toast.error("No intervals available");
+  }
 
   return (
     <div>
-      <h1>User Profile</h1>
-      <p>Total Time: {totalTime}</p>
+      <h2>Total Time Intervals:</h2>
+      <ul>
+        {data.intervals.map((interval) => (
+          <li key={interval._id}>
+            Start: {formatTime(new Date(interval.startTime))}, End:{" "}
+            {formatTime(new Date(interval.endTime))}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

@@ -13,7 +13,10 @@ import {
   login,
   register,
 } from "./controllers/UserController.js";
-import { getTotalTime, updateTotalTime } from "./controllers/TimeController.js";
+import {
+  getIntervals,
+  saveTimeInterval,
+} from "./controllers/TimeController.js";
 
 const app = express();
 
@@ -35,10 +38,10 @@ app.post(
 app.post("/auth/login", loginValidation, handleValidationErrors, login);
 //get user info
 app.get("/auth/me", getMe);
-//add user total time
-app.put("/users/:userId/total-time", updateTotalTime);
-//get the total time of user
-app.get("/users/:userId/total-time", getTotalTime);
+//add time interval for a user
+app.post("/users/:userId/time-intervals", saveTimeInterval);
+//get the total time of a user
+app.get("/users/:userId/time-intervals", getIntervals);
 //get all users
 app.get("/users", getAllUsers);
 

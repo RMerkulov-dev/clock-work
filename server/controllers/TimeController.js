@@ -1,41 +1,47 @@
 import User from "../models/User.js";
 
-// Function to update the total time for a user
-export const updateTotalTime = async (req, res) => {
+export const saveTimeInterval = async (req, res) => {
   try {
     const { userId } = req.params;
-    const { totalTime } = req.body;
+    const { startTime, endTime } = req.body;
 
-    //Find the user by userId
+    // Parse the ISO strings to Date objects
+    const startDate = new Date(startTime);
+    const endDate = new Date(endTime);
+
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ error: "User not found" });
     }
 
-    // Update the total time for the user
-    user.totalTime = totalTime;
+    // Add the new time interval to the user's array of timeIntervals
+    user.timeIntervals.push({ startTime: startDate, endTime: endDate });
     await user.save();
-    res.status(200).json({ message: "Total time updated successfully" });
+
+    res.status(200).json({ message: "Time interval saved successfully" });
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Error updating total time", err });
+    console.error("Error saving time interval:", err);
+    res.status(500).json({ error: "Failed to save time interval" });
   }
 };
 
-// Function to get the total time for a user
-export const getTotalTime = async (req, res) => {
+export const getIntervals = async (req, res) => {
   try {
     const userId = req.params.userId;
 
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ error: "User not found" });
     }
 
-    res.status(200).json({ totalTime: user.totalTime });
+    // Get all time intervals from the user's timeIntervals array
+    const intervals = user.timeIntervals;
+
+    res.status(200).json({ intervals });
   } catch (error) {
-    res.status(500).json({ message: "Error getting total time", error });
+    console.error("Error getting intervals:", error);
+    res.status(500).json({ error: "Failed to get intervals" });
   }
 };
