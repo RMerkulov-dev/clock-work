@@ -73,3 +73,9 @@ type Interval={
 export interface TimesInterval {
 intervals:Interval[]
 }
+
+export interface StatisticsProps {
+    classname?: string;
+    title: string;
+    children: React.ReactNode;
+}

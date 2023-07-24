@@ -2,9 +2,48 @@ import React from "react";
 
 import AddTimes from "../components/AddTimes";
 import UserTotalTime from "../components/UserTotalTime";
-import Statistic from "../components/Statistic";
+import { useAuthStore } from "../stores/authStore";
+import useGetTotalTime from "../hooks/useGetTotalTime";
+import toast from "react-hot-toast";
+import {
+  calculateTotalTime,
+  currentDateIntervals,
+  groupIntervalsByWeek,
+} from "../helpers/times";
+import Statistics from "../components/Statistics";
 
 const TimesPage = () => {
+  const { userId, token } = useAuthStore();
+  const currentDate = new Date().toISOString().slice(0, 10);
+  // @ts-ignore
+  const { data, isLoading, error } = useGetTotalTime(userId);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    // @ts-ignore
+    return toast.error("Error loading");
+  }
+
+  const totalTimeStatistic = data?.intervals;
+  const groupedIntervals = groupIntervalsByWeek(totalTimeStatistic);
+
+  // Calculate total time for the current date
+  const totalCurrentDate = calculateTotalTime(
+    currentDateIntervals(totalTimeStatistic, currentDate)
+  );
+  console.log(totalCurrentDate);
+
+  // Calculate total time for the current week
+  const currentWeekIntervals =
+    groupedIntervals.length > 0 ? groupedIntervals[0][1] : [];
+  // @ts-ignore
+  const totalCurrentWeek = calculateTotalTime(currentWeekIntervals);
+
+  // Calculate total time for all intervals
+  const totalAllTime = calculateTotalTime(totalTimeStatistic);
   return (
     <div className="container">
       <div className="p-3 flex items-center justify-end">Avatar</div>
@@ -20,10 +59,13 @@ const TimesPage = () => {
       </div>
       <div>
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
-          <Statistic />
+          <Statistics title="Day Time">{totalCurrentDate}</Statistics>
         </div>
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
-          This week
+          <Statistics title="Week time">{totalCurrentWeek}</Statistics>
+        </div>
+        <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
+          <Statistics title="Total time">{totalAllTime}</Statistics>
         </div>
       </div>
     </div>
