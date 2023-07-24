@@ -2,6 +2,7 @@ import React from "react";
 
 import AddTimes from "../components/AddTimes";
 import UserTotalTime from "../components/UserTotalTime";
+import Statistic from "../components/Statistic";
 
 const TimesPage = () => {
   return (
@@ -18,7 +19,9 @@ const TimesPage = () => {
         </div>
       </div>
       <div>
-        <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg"></div>
+        <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
+          <Statistic />
+        </div>
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
           This week
         </div>

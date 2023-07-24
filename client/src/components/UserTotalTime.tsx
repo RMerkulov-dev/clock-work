@@ -48,13 +48,11 @@ const UserTotalTime = () => {
   });
 
   // Calculate total time for the current date
-  const totalCurrentDate = calculateTotalTime(currentDateIntervals);
 
   // Calculate total time for the current week
   const currentWeekIntervals =
     groupedIntervals.length > 0 ? groupedIntervals[0][1] : [];
   // @ts-ignore
-  const totalCurrentWeek = calculateTotalTime(currentWeekIntervals);
 
   // Calculate total time for all intervals
   const totalAllTime = calculateTotalTime(timeIntervals);
@@ -72,12 +70,7 @@ const UserTotalTime = () => {
           </li>
         ))}
       </ul>
-      <div>
-        {" "}
-        <p>Total Time for Current Date: {totalCurrentDate}</p>
-        <p>Total Time for Current Week: {totalCurrentWeek}</p>
-        <p>Total Time Overall: {totalAllTime}</p>
-      </div>
+      <div> </div>
     </div>
   );
 };
