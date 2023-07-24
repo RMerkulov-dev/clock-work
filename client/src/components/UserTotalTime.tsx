@@ -1,31 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthStore } from "../stores/authStore";
 import { setUserHeader } from "../utils/axios-utils";
 import useGetTotalTime from "../hooks/useGetTotalTime";
 import toast from "react-hot-toast";
-
-const formatTime = (date: any) => {
-  const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
-  return `${hours}:${minutes}`;
-};
-
-const calculateTotalTime = (intervals: any[]) => {
-  let totalMinutes = 0;
-
-  intervals.forEach((interval) => {
-    const startTime = new Date(interval.startTime);
-    const endTime = new Date(interval.endTime);
-    const difference = endTime.getTime() - startTime.getTime();
-    totalMinutes += difference / (1000 * 60);
-  });
-
-  const hours = Math.floor(totalMinutes / 60);
-  const minutes = totalMinutes % 60;
-  return `${hours} hours and ${minutes} minutes`;
-};
+import { calculateTotalTime, formatTime } from "../helpers/times";
 
 const UserTotalTime = () => {
+  const [currentDate, setCurrentDate] = useState(() =>
+    new Date().toISOString().slice(0, 10)
+  );
   const { userId, token } = useAuthStore();
 
   useEffect(() => {
@@ -54,14 +37,22 @@ const UserTotalTime = () => {
 
   const totalTime = calculateTotalTime(data.intervals);
 
+  const filteredIntervals = data.intervals.filter((interval) => {
+    const startDate = new Date(interval.startTime).toISOString().slice(0, 10);
+    const endDate = new Date(interval.endTime).toISOString().slice(0, 10);
+    return startDate === currentDate || endDate === currentDate;
+  });
+
   return (
     <div>
       <h2>Total Time Intervals:</h2>
       <ul>
-        {data.intervals.map((interval) => (
+        {filteredIntervals.map((interval) => (
           <li key={interval._id}>
-            Start: {formatTime(new Date(interval.startTime))}, End:{" "}
-            {formatTime(new Date(interval.endTime))}
+            <span>
+              Start: {formatTime(new Date(interval.startTime))}, End:{" "}
+              {formatTime(new Date(interval.endTime))}
+            </span>
           </li>
         ))}
       </ul>

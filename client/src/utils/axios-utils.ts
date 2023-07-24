@@ -10,7 +10,6 @@ export const setUserHeader = (token: string | null) => {
   } else {
     delete apiClient.defaults.headers.common["Authorization"];
   }
-  console.log("User token set:", token);
 };
 
 export { BASE_URL, apiClient };
