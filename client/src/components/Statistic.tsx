@@ -1,7 +1,11 @@
 import React from "react";
 import { useAuthStore } from "../stores/authStore";
 import toast from "react-hot-toast";
-import { calculateTotalTime, groupIntervalsByWeek } from "../helpers/times";
+import {
+  calculateTotalTime,
+  currentDateIntervals,
+  groupIntervalsByWeek,
+} from "../helpers/times";
 import useGetTotalTime from "../hooks/useGetTotalTime";
 
 const Statistic = () => {
@@ -22,14 +26,10 @@ const Statistic = () => {
   const totalTimeStatistic = data?.intervals;
   const groupedIntervals = groupIntervalsByWeek(totalTimeStatistic);
 
-  const currentDateIntervals = totalTimeStatistic.filter((interval) => {
-    const startDate = new Date(interval.startTime).toISOString().slice(0, 10);
-    const endDate = new Date(interval.endTime).toISOString().slice(0, 10);
-    return startDate === currentDate || endDate === currentDate;
-  });
-
   // Calculate total time for the current date
-  const totalCurrentDate = calculateTotalTime(currentDateIntervals);
+  const totalCurrentDate = calculateTotalTime(
+    currentDateIntervals(totalTimeStatistic, currentDate)
+  );
 
   // Calculate total time for the current week
   const currentWeekIntervals =

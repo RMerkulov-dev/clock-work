@@ -35,3 +35,11 @@ export const groupIntervalsByWeek = (intervals: any[]) => {
 
   return Object.entries(groupedIntervals);
 };
+
+export const currentDateIntervals = (totalTime: any, currentDate: string) => {
+  return totalTime.filter((interval: any) => {
+    const startDate = new Date(interval.startTime).toISOString().slice(0, 10);
+    const endDate = new Date(interval.endTime).toISOString().slice(0, 10);
+    return startDate === currentDate || endDate === currentDate;
+  });
+};

@@ -3,11 +3,7 @@ import { useAuthStore } from "../stores/authStore";
 import { setUserHeader } from "../utils/axios-utils";
 import useGetTotalTime from "../hooks/useGetTotalTime";
 import toast from "react-hot-toast";
-import {
-  calculateTotalTime,
-  formatTime,
-  groupIntervalsByWeek,
-} from "../helpers/times";
+import { currentDateIntervals, formatTime } from "../helpers/times";
 
 const UserTotalTime = () => {
   const currentDate = new Date().toISOString().slice(0, 10);
@@ -38,30 +34,14 @@ const UserTotalTime = () => {
   }
 
   const timeIntervals = data.intervals;
-  const groupedIntervals = groupIntervalsByWeek(timeIntervals);
 
-  // Filter intervals for the current date
-  const currentDateIntervals = timeIntervals.filter((interval) => {
-    const startDate = new Date(interval.startTime).toISOString().slice(0, 10);
-    const endDate = new Date(interval.endTime).toISOString().slice(0, 10);
-    return startDate === currentDate || endDate === currentDate;
-  });
-
-  // Calculate total time for the current date
-
-  // Calculate total time for the current week
-  const currentWeekIntervals =
-    groupedIntervals.length > 0 ? groupedIntervals[0][1] : [];
-  // @ts-ignore
-
-  // Calculate total time for all intervals
-  const totalAllTime = calculateTotalTime(timeIntervals);
+  const dayIntervals = currentDateIntervals(timeIntervals, currentDate);
 
   return (
     <div className="rounded-xl p-4">
       <h2 className="text-2xl text-amber-100">Time Intervals:</h2>
       <ul className=" h-[100px] overflow-auto rounded-xl border-[1px] border-amber-100 border-opacity-95 py-2 px-4">
-        {currentDateIntervals.map((interval) => (
+        {dayIntervals.map((interval) => (
           <li key={interval._id}>
             <span>
               Start: {formatTime(new Date(interval.startTime))}, End:{" "}
