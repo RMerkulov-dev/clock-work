@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import TimeIntervalSchema from "./Time.js";
 
 const UserSchema = new mongoose.Schema(
   {
@@ -16,18 +17,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
     avatarUrl: String,
-    startTime: {
-      type: Date,
-      default: null,
-    },
-    endTime: {
-      type: Date,
-      default: null,
-    },
-    totalTime: {
-      type: Number,
-      default: 0,
-    },
+    timeIntervals: [TimeIntervalSchema], // Corrected field name here
   },
   {
     timestamps: true,
