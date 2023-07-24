@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAuthStore } from "../stores/authStore";
 import { setUserHeader } from "../utils/axios-utils";
 import useGetTotalTime from "../hooks/useGetTotalTime";
 import toast from "react-hot-toast";
-import { calculateTotalTime, formatTime } from "../helpers/times";
+import {
+  calculateTotalTime,
+  formatTime,
+  groupIntervalsByWeek,
+} from "../helpers/times";
 
 const UserTotalTime = () => {
-  const [currentDate, setCurrentDate] = useState(() =>
-    new Date().toISOString().slice(0, 10)
-  );
+  const currentDate = new Date().toISOString().slice(0, 10);
   const { userId, token } = useAuthStore();
 
   useEffect(() => {
@@ -35,13 +37,16 @@ const UserTotalTime = () => {
     return toast.error("No intervals available");
   }
 
-  const totalTime = calculateTotalTime(data.intervals);
+  let timeIntervals = data.intervals;
+  const totalTime = calculateTotalTime(timeIntervals);
 
-  const filteredIntervals = data.intervals.filter((interval) => {
+  const filteredIntervals = timeIntervals.filter((interval) => {
     const startDate = new Date(interval.startTime).toISOString().slice(0, 10);
     const endDate = new Date(interval.endTime).toISOString().slice(0, 10);
     return startDate === currentDate || endDate === currentDate;
   });
+
+  const groupedIntervals = groupIntervalsByWeek(timeIntervals);
 
   return (
     <div>

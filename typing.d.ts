@@ -70,6 +70,6 @@ type Interval={
     endTime:string
 }
 
-export interface IntervalsProps{
+export interface TimesInterval {
 intervals:Interval[]
 }

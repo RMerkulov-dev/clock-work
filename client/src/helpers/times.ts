@@ -18,3 +18,20 @@ export const calculateTotalTime = (intervals: any[]) => {
   const minutes = totalMinutes % 60;
   return `${hours} hours and ${minutes} minutes`;
 };
+
+export const groupIntervalsByWeek = (intervals: any[]) => {
+  const groupedIntervals = intervals.reduce((groups, interval) => {
+    const startDate = new Date(interval.startTime);
+    const weekStart = new Date(
+      startDate.getFullYear(),
+      startDate.getMonth(),
+      startDate.getDate() - startDate.getDay()
+    );
+    const weekNumber = weekStart.toISOString().slice(0, 10); // Using week start date as key
+    groups[weekNumber] = groups[weekNumber] || [];
+    groups[weekNumber].push(interval);
+    return groups;
+  }, {});
+
+  return Object.entries(groupedIntervals);
+};
