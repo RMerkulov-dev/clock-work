@@ -37,22 +37,32 @@ const UserTotalTime = () => {
     return toast.error("No intervals available");
   }
 
-  let timeIntervals = data.intervals;
-  const totalTime = calculateTotalTime(timeIntervals);
+  const timeIntervals = data.intervals;
+  const groupedIntervals = groupIntervalsByWeek(timeIntervals);
 
-  const filteredIntervals = timeIntervals.filter((interval) => {
+  // Filter intervals for the current date
+  const currentDateIntervals = timeIntervals.filter((interval) => {
     const startDate = new Date(interval.startTime).toISOString().slice(0, 10);
     const endDate = new Date(interval.endTime).toISOString().slice(0, 10);
     return startDate === currentDate || endDate === currentDate;
   });
 
-  const groupedIntervals = groupIntervalsByWeek(timeIntervals);
+  // Calculate total time for the current date
+  const totalCurrentDate = calculateTotalTime(currentDateIntervals);
+
+  // Calculate total time for the current week
+  const currentWeekIntervals =
+    groupedIntervals.length > 0 ? groupedIntervals[0][1] : [];
+  const totalCurrentWeek = calculateTotalTime(currentWeekIntervals);
+
+  // Calculate total time for all intervals
+  const totalAllTime = calculateTotalTime(timeIntervals);
 
   return (
     <div>
       <h2>Total Time Intervals:</h2>
       <ul>
-        {filteredIntervals.map((interval) => (
+        {currentDateIntervals.map((interval) => (
           <li key={interval._id}>
             <span>
               Start: {formatTime(new Date(interval.startTime))}, End:{" "}
@@ -61,7 +71,9 @@ const UserTotalTime = () => {
           </li>
         ))}
       </ul>
-      <p>Total Time: {totalTime}</p>
+      <p>Total Time for Current Date: {totalCurrentDate}</p>
+      <p>Total Time for Current Week: {totalCurrentWeek}</p>
+      <p>Total Time Overall: {totalAllTime}</p>
     </div>
   );
 };
