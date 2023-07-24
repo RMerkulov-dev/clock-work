@@ -2,7 +2,7 @@ import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useAuthStore } from "../stores/authStore";
 import useAddTimeInterval from "../hooks/useAddTimeInterval";
-import { Input } from "./index";
+import { Button, Input } from "./index";
 import { format, parseISO } from "date-fns";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -56,7 +56,7 @@ const AddTimes = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col items-center justify-center gap-4">
       <Input
         id="startTime"
         label="Start Time (hh:mm)"
@@ -73,7 +73,7 @@ const AddTimes = () => {
         errors={errors}
         required
       />
-      <button type="submit">Add Time Interval</button>
+      <Button label="ADD" onClick={handleSubmit(onSubmit)}></Button>
     </form>
   );
 };

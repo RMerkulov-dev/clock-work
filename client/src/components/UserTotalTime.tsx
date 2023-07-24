@@ -60,9 +60,9 @@ const UserTotalTime = () => {
   const totalAllTime = calculateTotalTime(timeIntervals);
 
   return (
-    <div>
-      <h2>Total Time Intervals:</h2>
-      <ul>
+    <div className="rounded-xl p-4">
+      <h2 className="text-2xl text-amber-100">Time Intervals:</h2>
+      <ul className=" h-[100px] overflow-auto rounded-xl border-[1px] border-amber-100 border-opacity-95 py-2 px-4">
         {currentDateIntervals.map((interval) => (
           <li key={interval._id}>
             <span>
@@ -72,9 +72,12 @@ const UserTotalTime = () => {
           </li>
         ))}
       </ul>
-      <p>Total Time for Current Date: {totalCurrentDate}</p>
-      <p>Total Time for Current Week: {totalCurrentWeek}</p>
-      <p>Total Time Overall: {totalAllTime}</p>
+      <div>
+        {" "}
+        <p>Total Time for Current Date: {totalCurrentDate}</p>
+        <p>Total Time for Current Week: {totalCurrentWeek}</p>
+        <p>Total Time Overall: {totalAllTime}</p>
+      </div>
     </div>
   );
 };

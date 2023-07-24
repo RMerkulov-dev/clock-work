@@ -27,7 +27,7 @@ const Input = ({
           font-light 
           bg-white 
           border-2
-          rounded-md
+          rounded-xl
           outline-none
           transition
           disabled:opacity-70
