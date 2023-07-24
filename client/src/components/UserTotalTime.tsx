@@ -53,6 +53,7 @@ const UserTotalTime = () => {
   // Calculate total time for the current week
   const currentWeekIntervals =
     groupedIntervals.length > 0 ? groupedIntervals[0][1] : [];
+  // @ts-ignore
   const totalCurrentWeek = calculateTotalTime(currentWeekIntervals);
 
   // Calculate total time for all intervals

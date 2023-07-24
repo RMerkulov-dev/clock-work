@@ -9,6 +9,7 @@ const TimesPage = () => {
       <div>Avatar</div>
       <div>
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg ">
+          {/*@ts-ignore*/}
           <AddTimes />
         </div>
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
@@ -17,6 +18,7 @@ const TimesPage = () => {
       </div>
       <div>
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
+          {/*@ts-ignore*/}
           <UserTotalTime />
         </div>
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
