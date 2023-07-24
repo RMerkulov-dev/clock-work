@@ -16,7 +16,7 @@ export const calculateTotalTime = (intervals: any[]) => {
 
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
-  return `${hours} hours and ${minutes} minutes`;
+  return `${hours}h ${minutes}min`;
 };
 
 export const groupIntervalsByWeek = (intervals: any[]) => {
