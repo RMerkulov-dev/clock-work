@@ -11,7 +11,7 @@ import {
   groupIntervalsByWeek,
 } from "../helpers/times";
 import Statistics from "../components/Statistics";
-import { ProgressBar } from "../components";
+import { GoalSection } from "../components";
 
 const TimesPage = () => {
   const { userId, token } = useAuthStore();
@@ -35,7 +35,6 @@ const TimesPage = () => {
   const totalCurrentDate = calculateTotalTime(
     currentDateIntervals(totalTimeStatistic, currentDate)
   );
-  console.log(totalCurrentDate);
 
   // Calculate total time for the current week
   const currentWeekIntervals =
@@ -54,7 +53,7 @@ const TimesPage = () => {
           <AddTimes />
         </div>
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl drop-shadow-lg w-full p-4 ">
-          <ProgressBar />
+          <GoalSection />
         </div>
       </div>
       <div>

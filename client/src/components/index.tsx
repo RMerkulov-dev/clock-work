@@ -1,6 +1,6 @@
 import Button from "./Button";
 import Modal from "./modals/Modal";
 import Input from "./inputs/Input";
-import ProgressBar from "./ProgressBar";
+import GoalSection from "./GoalSection";
 
-export { Button, Modal, Input, ProgressBar };
+export { Button, Modal, Input, GoalSection };
