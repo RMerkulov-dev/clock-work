@@ -1,3 +1,9 @@
+export const options = [
+  { value: 480, label: "Normal" },
+  { value: 600, label: "Large" },
+  { value: 720, label: "Extra" },
+];
+
 export const formatTime = (date: any) => {
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
