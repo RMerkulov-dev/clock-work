@@ -12,6 +12,7 @@ import {
 } from "../helpers/times";
 import Statistics from "../components/Statistics";
 import { GoalSection } from "../components";
+import Header from "../components/Header";
 
 const TimesPage = () => {
   const { userId, token } = useAuthStore();
@@ -46,7 +47,7 @@ const TimesPage = () => {
   const totalAllTime = calculateTotalTime(totalTimeStatistic);
   return (
     <div className="container">
-      <div className="p-3 flex items-center justify-end">Avatar</div>
+      <Header />
       <div className="flex sm:flex-col md:flex-row gap-3 mt-3">
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl drop-shadow-lg w-full p-4 ">
           {/*@ts-ignore*/}
