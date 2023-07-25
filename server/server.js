@@ -17,6 +17,7 @@ import {
   getIntervals,
   saveTimeInterval,
 } from "./controllers/TimeController.js";
+import checkAuth from "./utils/checkAuth.js";
 
 const app = express();
 
@@ -37,7 +38,7 @@ app.post(
 //login user
 app.post("/auth/login", loginValidation, handleValidationErrors, login);
 //get user info
-app.get("/auth/me", getMe);
+app.get("/auth/me", checkAuth, getMe);
 //add time interval for a user
 app.post("/users/:userId/time-intervals", saveTimeInterval);
 //get the total time of a user
