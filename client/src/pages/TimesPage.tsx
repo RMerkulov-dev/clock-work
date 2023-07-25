@@ -57,7 +57,7 @@ const TimesPage = () => {
           <UserTotalTime />
         </div>
       </div>
-      <div className=" flex gap-3 items-center justify-between mt-3">
+      <div className=" flex gap-3 items-start justify-between mt-3">
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl drop-shadow-lg p-3 w-full">
           <Statistics title="Day Time:">
             {" "}
