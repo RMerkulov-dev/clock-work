@@ -14,6 +14,7 @@ import {
   register,
 } from "./controllers/UserController.js";
 import {
+  deleteTimeInterval,
   getIntervals,
   saveTimeInterval,
 } from "./controllers/TimeController.js";
@@ -41,6 +42,8 @@ app.post("/auth/login", loginValidation, handleValidationErrors, login);
 app.get("/auth/me", checkAuth, getMe);
 //add time interval for a user
 app.post("/users/:userId/time-intervals", saveTimeInterval);
+//delete time intervals
+app.delete("/users/:userId/time-intervals", deleteTimeInterval);
 //get the total time of a user
 app.get("/users/:userId/time-intervals", getIntervals);
 //get all users

@@ -18,7 +18,7 @@ const Header = () => {
 
   if (isError) {
     toast.error("Error fetching user info");
-    return <div>Error fetching user info</div>;
+    return <Avatar size="30" round color="#c46f2d" />;
   }
 
   const { fullName } = data;
@@ -26,13 +26,18 @@ const Header = () => {
   const logout = () => {
     // @ts-ignore
     isLogOut.onLogout();
+    toast.success("Log out");
     navigate(home);
   };
   return (
     <div className="flex items-center justify-end gap-4">
       <p className="text-l text-amber-100">{`Hello ${fullName}`}</p>
       <Avatar size="30" round name={fullName} color="#c46f2d" />
-      <AiOutlineLogout size={30} className="text-amber-500" onClick={logout} />
+      <AiOutlineLogout
+        size={30}
+        className="text-amber-500 cursor-pointer"
+        onClick={logout}
+      />
     </div>
   );
 };
