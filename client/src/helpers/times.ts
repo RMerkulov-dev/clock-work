@@ -1,7 +1,13 @@
-export const options = [
-  { value: 480, label: "Normal" },
-  { value: 600, label: "Large" },
-  { value: 720, label: "Extra" },
+export const optionsDay = [
+  { value: 480, label: "8 Hours" },
+  { value: 600, label: "10 Hours" },
+  { value: 720, label: "12 Hours" },
+];
+
+export const optionsWeek = [
+  { value: 2400, label: "40 Hours" },
+  { value: 3000, label: "50 Hours" },
+  { value: 3600, label: "70 Hours" },
 ];
 
 export const formatTime = (date: any) => {
@@ -23,6 +29,19 @@ export const calculateTotalTime = (intervals: any[]) => {
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
   return `${hours}h ${minutes}min`;
+};
+
+export const calculateTotalMinutes = (intervals: any[]) => {
+  let totalMinutes = 0;
+
+  intervals.forEach((interval) => {
+    const startTime = new Date(interval.startTime);
+    const endTime = new Date(interval.endTime);
+    const difference = endTime.getTime() - startTime.getTime();
+    totalMinutes += difference / (1000 * 60);
+  });
+
+  return totalMinutes;
 };
 
 export const groupIntervalsByWeek = (intervals: any[]) => {

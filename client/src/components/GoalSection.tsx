@@ -2,13 +2,21 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import React, { useState } from "react";
 import { useAuthStore } from "../stores/authStore";
 import Select from "react-select";
-import { currentDateIntervals, options } from "../helpers/times";
+import {
+  calculateTotalMinutes,
+  currentDateIntervals,
+  groupIntervalsByWeek,
+  optionsDay,
+  optionsWeek,
+} from "../helpers/times";
 import useGetTotalTime from "../hooks/useGetTotalTime";
 import toast from "react-hot-toast";
 
 const GoalSection = () => {
-  const [goal, setGoal] = useState("");
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [selectedOptionDay, setSelectedOptionDay] = useState(optionsDay[0]);
+  const [selectedOptionDWeek, setSelectedOptionDWeek] = useState(
+    optionsWeek[0]
+  );
   const { userId, token } = useAuthStore();
   const currentDate = new Date().toISOString().slice(0, 10);
 
@@ -22,51 +30,55 @@ const GoalSection = () => {
     return toast.error("Error loading");
   }
 
-  const tetsMin = (intervals: any[]) => {
-    let totalMinutes = 0;
-
-    intervals.forEach((interval) => {
-      const startTime = new Date(interval.startTime);
-      const endTime = new Date(interval.endTime);
-      const difference = endTime.getTime() - startTime.getTime();
-      totalMinutes += difference / (1000 * 60);
-    });
-
-    return totalMinutes;
-  };
-
   const totalTimeStatistic = data?.intervals;
+  const groupedIntervals = groupIntervalsByWeek(totalTimeStatistic);
   // Calculate total time for the current date
-  const totalCurrentDate = tetsMin(
+  const totalCurrentDate = calculateTotalMinutes(
     currentDateIntervals(totalTimeStatistic, currentDate)
   );
-  console.log(totalCurrentDate);
-  console.log("option", selectedOption.value);
 
-  const progressValue = parseInt(
-    ((totalCurrentDate / selectedOption.value) * 100).toFixed(0)
+  // Calculate total time for the current week
+  const currentWeekIntervals =
+    groupedIntervals.length > 0 ? groupedIntervals[0][1] : [];
+  const totalCurrentWeek = calculateTotalMinutes(currentWeekIntervals);
+
+  const progressValueDay = parseInt(
+    ((totalCurrentDate / selectedOptionDay.value) * 100).toFixed(0)
+  );
+
+  const progressValueWeek = parseInt(
+    ((totalCurrentWeek / selectedOptionDWeek.value) * 100).toFixed(0)
   );
 
   return (
     <div className="flex flex-col items-start justify-center gap-7">
-      <div className="flex items-center justify-baseline gap-3">
-        <p className="text-xl text-amber-100">Goal</p>
+      <div className="flex items-center justify-baseline gap-3 ">
+        <p className="text-xl text-amber-100 w-[120px]">DAY GOAL</p>
         <Select
-          options={options}
-          defaultValue={selectedOption}
+          options={optionsDay}
+          defaultValue={selectedOptionDay}
           // @ts-ignore
-          onChange={(selectedOption) => setSelectedOption(selectedOption)}
+          onChange={(selectedOption) => setSelectedOptionDay(selectedOption)}
+        />
+      </div>
+      <div className="flex items-center justify-baseline gap-3  ">
+        <p className="text-xl text-amber-100 w-[120px]">WEEK GOAL</p>
+        <Select
+          options={optionsWeek}
+          defaultValue={selectedOptionDWeek}
+          // @ts-ignore
+          onChange={(selectedOption) => setSelectedOptionDWeek(selectedOption)}
         />
       </div>
       <div className="w-full ">
         <p className="mb-2 text-l text-amber-100">
           {" "}
-          {`Day Goal: ${selectedOption.value / 60}h `}
+          {`Day Goal: ${selectedOptionDay.value / 60}h `}
         </p>
         <ProgressBar
           completed={totalCurrentDate}
-          maxCompleted={selectedOption.value}
-          customLabel={`${progressValue}%`}
+          maxCompleted={selectedOptionDay.value}
+          customLabel={`${progressValueDay}%`}
           height="40px"
           animateOnRender
           bgColor={"#ed7947"}
@@ -76,12 +88,12 @@ const GoalSection = () => {
       <div className="w-full ">
         <p className="mb-2 text-l text-amber-100">
           {" "}
-          {`Week Goal: ${selectedOption.value / 60}h `}
+          {`Week Goal: ${selectedOptionDay.value / 60}h `}
         </p>
         <ProgressBar
-          completed={totalCurrentDate}
-          maxCompleted={selectedOption.value}
-          customLabel={`${progressValue}%`}
+          completed={totalCurrentWeek}
+          maxCompleted={selectedOptionDWeek.value}
+          customLabel={`${progressValueWeek}%`}
           height="40px"
           animateOnRender
           bgColor={"#ed7947"}
