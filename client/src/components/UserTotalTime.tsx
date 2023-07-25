@@ -30,7 +30,7 @@ const UserTotalTime = () => {
   }
 
   if (!data || data.intervals.length === 0) {
-    return toast.error("No intervals available");
+    return <span>No any intervals today, bro!</span>;
   }
 
   const timeIntervals = data.intervals;
@@ -42,11 +42,10 @@ const UserTotalTime = () => {
       <h2 className="text-2xl text-amber-100">Time Intervals:</h2>
       <ul className=" h-[100px] overflow-auto rounded-xl border-[1px] border-amber-100 border-opacity-95 py-1 px-2 mt-2">
         {dayIntervals.map((interval) => (
-          <li key={interval._id}>
-            <span>
-              Start: {formatTime(new Date(interval.startTime))}, End:{" "}
-              {formatTime(new Date(interval.endTime))}
-            </span>
+          <li key={interval._id} className="flex gap-3">
+            <span>{interval.description}</span>
+            <span>Start: {formatTime(new Date(interval.startTime))}</span>
+            <span>End: {formatTime(new Date(interval.endTime))}</span>
           </li>
         ))}
       </ul>

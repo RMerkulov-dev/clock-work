@@ -19,6 +19,7 @@ const AddTimes = () => {
     defaultValues: {
       startTime: "",
       endTime: "",
+      description: "",
     },
   });
   if (!userId) {
@@ -30,6 +31,7 @@ const AddTimes = () => {
     // Extract the time value from the input
     const startTimeValue = data.startTime; // Format: "hh:mm"
     const endTimeValue = data.endTime; // Format: "hh:mm"
+    const description = data.description;
 
     // Create Date objects with the current date and the extracted time values
     const currentDate = new Date();
@@ -45,6 +47,7 @@ const AddTimes = () => {
       await addTimeIntervalMutation.mutateAsync({
         startTime,
         endTime,
+        description,
       });
       reset();
       await queryClient.invalidateQueries(["totalTime", userId]);
@@ -57,6 +60,14 @@ const AddTimes = () => {
 
   return (
     <form className="flex flex-col items-center justify-center gap-4">
+      <Input
+        id="description" // Add the description input
+        label="Description"
+        type="text"
+        register={register}
+        errors={errors}
+        required
+      />
       <Input
         id="startTime"
         label="Start Time (hh:mm)"
@@ -73,6 +84,7 @@ const AddTimes = () => {
         errors={errors}
         required
       />
+
       <Button label="ADD" onClick={handleSubmit(onSubmit)}></Button>
     </form>
   );

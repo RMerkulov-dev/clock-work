@@ -68,6 +68,7 @@ type Interval={
     _id:string,
     startTime:string,
     endTime:string
+    description: string;
 }
 
 export interface TimesInterval {

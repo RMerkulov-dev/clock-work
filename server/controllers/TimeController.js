@@ -3,7 +3,7 @@ import User from "../models/User.js";
 export const saveTimeInterval = async (req, res) => {
   try {
     const { userId } = req.params;
-    const { startTime, endTime } = req.body;
+    const { startTime, endTime, description } = req.body;
 
     // Parse the ISO strings to Date objects
     const startDate = new Date(startTime);
@@ -16,7 +16,11 @@ export const saveTimeInterval = async (req, res) => {
     }
 
     // Add the new time interval to the user's array of timeIntervals
-    user.timeIntervals.push({ startTime: startDate, endTime: endDate });
+    user.timeIntervals.push({
+      startTime: startDate,
+      endTime: endDate,
+      description,
+    });
     await user.save();
 
     res.status(200).json({ message: "Time interval saved successfully" });
