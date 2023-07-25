@@ -11,6 +11,7 @@ import {
   groupIntervalsByWeek,
 } from "../helpers/times";
 import Statistics from "../components/Statistics";
+import { ProgressBar } from "../components";
 
 const TimesPage = () => {
   const { userId, token } = useAuthStore();
@@ -47,11 +48,16 @@ const TimesPage = () => {
   return (
     <div className="container">
       <div className="p-3 flex items-center justify-end">Avatar</div>
-      <div className="flex flex-col justify-between mt-3">
+      <div className="flex sm:flex-col md:flex-row gap-3 mt-3">
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl drop-shadow-lg w-full p-4 ">
           {/*@ts-ignore*/}
           <AddTimes />
         </div>
+        <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl drop-shadow-lg w-full p-4 ">
+          <ProgressBar />
+        </div>
+      </div>
+      <div>
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl drop-shadow-lg mt-3 p-4">
           {/*@ts-ignore*/}
           <UserTotalTime />
