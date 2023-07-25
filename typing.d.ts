@@ -1,6 +1,8 @@
 import React from "react";
 import {IconType} from "react-icons";
 import {FieldErrors, FieldValues} from "react-hook-form";
+import {StateCreator} from "zustand";
+import {PersistOptions} from "zustand/middleware";
 
 interface ModalStore{
     isOpen:boolean;
@@ -35,6 +37,10 @@ interface AuthProps{
     onLogin:()=>void;
     onLogout:()=>void;
 }
+type MyPersist = (
+    config: StateCreator<AuthProps>,
+    options: PersistOptions<AuthProps>
+) => StateCreator<MyState>
 
 interface InputProps {
     id: string;

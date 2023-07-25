@@ -9,10 +9,11 @@ import { MainPage } from "./pages";
 
 const queryClient = new QueryClient();
 const App = () => {
-  const isLogin = useAuth();
+  const { isLogin } = useAuth();
 
   const { home, times } = routes;
 
+  // @ts-ignore
   const router = createBrowserRouter([
     {
       path: home,
@@ -20,6 +21,7 @@ const App = () => {
     },
     {
       path: times,
+      // @ts-ignore
       element: isLogin ? <TimesPage /> : <MainPage />,
     },
   ]);
