@@ -9,6 +9,9 @@ const TimeIntervalSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+  },
 });
 
 export default TimeIntervalSchema;

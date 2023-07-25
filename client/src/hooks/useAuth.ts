@@ -1,9 +1,10 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { AuthProps, MyPersist } from "../../../typing";
 
-export const useAuth = create(
-  persist(
-    (set) => ({
+export const useAuth = create<AuthProps>(
+  (persist as MyPersist)(
+    (set: any) => ({
       isLogin: false,
       onLogin: () => set({ isLogin: true }),
       onLogout: () => set({ isLogin: false }),

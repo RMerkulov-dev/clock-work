@@ -20,16 +20,16 @@ const MainPage = () => {
 
   return (
     <>
-      <div className="container  p-3 bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg  h-screen  ">
+      <div className="container  p-5 bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg  h-screen  ">
         <div className="flex items-center justify-between flex-col h-full">
           <div className="">
-            <h1 className="text-center font-bold text-gray-300 text-2xl">
-              Welcome to ClockWork
+            <h1 className="font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+              ClockWork
             </h1>
-            <img src={MainLogo} alt="logo" className="" />
+            <img src={MainLogo} alt="logo" className="w-[300px] " />
           </div>
           <div className="">
-            <h2 className="text-center font-bold text-gray-300 text-2xl w-full ">
+            <h2 className="font-extrabold text-transparent text-4xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
               Maximize Your Time,
               <br /> Achieve Your Goals
             </h2>

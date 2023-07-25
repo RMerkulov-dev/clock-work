@@ -14,9 +14,11 @@ import {
   register,
 } from "./controllers/UserController.js";
 import {
+  deleteTimeInterval,
   getIntervals,
   saveTimeInterval,
 } from "./controllers/TimeController.js";
+import checkAuth from "./utils/checkAuth.js";
 
 const app = express();
 
@@ -37,9 +39,11 @@ app.post(
 //login user
 app.post("/auth/login", loginValidation, handleValidationErrors, login);
 //get user info
-app.get("/auth/me", getMe);
+app.get("/auth/me", checkAuth, getMe);
 //add time interval for a user
 app.post("/users/:userId/time-intervals", saveTimeInterval);
+//delete time intervals
+app.delete("/users/:userId/time-intervals", deleteTimeInterval);
 //get the total time of a user
 app.get("/users/:userId/time-intervals", getIntervals);
 //get all users
