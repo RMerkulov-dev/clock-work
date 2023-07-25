@@ -55,6 +55,7 @@ const GoalSection = () => {
       <div className="flex items-center justify-baseline gap-3 ">
         <p className="text-xl text-amber-100 w-[120px]">DAY GOAL</p>
         <Select
+          className=" bg-transparent w-[130px]"
           options={optionsDay}
           defaultValue={selectedOptionDay}
           // @ts-ignore
@@ -64,6 +65,7 @@ const GoalSection = () => {
       <div className="flex items-center justify-baseline gap-3  ">
         <p className="text-xl text-amber-100 w-[120px]">WEEK GOAL</p>
         <Select
+          className="w-[130px]"
           options={optionsWeek}
           defaultValue={selectedOptionDWeek}
           // @ts-ignore
@@ -88,7 +90,7 @@ const GoalSection = () => {
       <div className="w-full ">
         <p className="mb-2 text-l text-amber-100">
           {" "}
-          {`Week Goal: ${selectedOptionDay.value / 60}h `}
+          {`Week Goal: ${selectedOptionDWeek.value / 60}h `}
         </p>
         <ProgressBar
           completed={totalCurrentWeek}
@@ -96,7 +98,7 @@ const GoalSection = () => {
           customLabel={`${progressValueWeek}%`}
           height="40px"
           animateOnRender
-          bgColor={"#ed7947"}
+          bgColor={"#b684e0"}
           labelClassName="label-bar"
         />
       </div>
