@@ -29,6 +29,11 @@ app.use(cors());
 
 //ROUTES
 
+//versel test
+app.get("/", (req, res) => {
+  res.send("Express on Vercel");
+});
+
 //register user
 app.post(
   "/auth/register",
