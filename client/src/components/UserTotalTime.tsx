@@ -34,14 +34,7 @@ const UserTotalTime = () => {
     return toast.error("Error loading");
   }
 
-  // if (!data || data.intervals.length === 0) {
-  //   return (
-  //     <span className="text-xl text-amber-100 opacity-4">
-  //       You didn't work today, bro!
-  //     </span>
-  //   );
-  // }
-
+  // @ts-ignore
   const timeIntervals = data.intervals;
 
   const dayIntervals = currentDateIntervals(timeIntervals, currentDate);
@@ -69,6 +62,7 @@ const UserTotalTime = () => {
               You didn't work today, bro!
             </p>
           ))}
+        {/*@ts-ignore*/}
         {dayIntervals.map((interval) => (
           <li key={interval._id} className="flex items-center justify-between">
             <span className="w-1/3 text-amber-100">{interval.description}</span>
