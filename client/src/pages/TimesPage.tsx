@@ -30,6 +30,7 @@ const TimesPage = () => {
   }
 
   const totalTimeStatistic = data?.intervals;
+  // @ts-ignore
   const groupedIntervals = groupIntervalsByWeek(totalTimeStatistic);
 
   // Calculate total time for the current date
@@ -44,6 +45,7 @@ const TimesPage = () => {
   const totalCurrentWeek = calculateTotalTime(currentWeekIntervals);
 
   // Calculate total time for all intervals
+  // @ts-ignore
   const totalAllTime = calculateTotalTime(totalTimeStatistic);
   return (
     <div className="container">
@@ -54,6 +56,7 @@ const TimesPage = () => {
           <AddTimes />
         </div>
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl drop-shadow-lg w-full p-4 ">
+          {/*@ts-ignore*/}
           <GoalSection />
         </div>
       </div>

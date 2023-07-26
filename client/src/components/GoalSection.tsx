@@ -31,6 +31,7 @@ const GoalSection = () => {
   }
 
   const totalTimeStatistic = data?.intervals;
+  // @ts-ignore
   const groupedIntervals = groupIntervalsByWeek(totalTimeStatistic);
   // Calculate total time for the current date
   const totalCurrentDate = calculateTotalMinutes(
@@ -40,6 +41,7 @@ const GoalSection = () => {
   // Calculate total time for the current week
   const currentWeekIntervals =
     groupedIntervals.length > 0 ? groupedIntervals[0][1] : [];
+  // @ts-ignore
   const totalCurrentWeek = calculateTotalMinutes(currentWeekIntervals);
 
   const progressValueDay = parseInt(
