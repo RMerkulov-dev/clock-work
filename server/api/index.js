@@ -5,20 +5,20 @@ import cors from "cors";
 import {
   loginValidation,
   registerValidation,
-} from "./validations/validation.js";
-import handleValidationErrors from "./utils/handleValidationErrors.js";
+} from "../validations/validation.js";
+import handleValidationErrors from "../utils/handleValidationErrors.js";
 import {
   getAllUsers,
   getMe,
   login,
   register,
-} from "./controllers/UserController.js";
+} from "../controllers/UserController.js";
 import {
   deleteTimeInterval,
   getIntervals,
   saveTimeInterval,
-} from "./controllers/TimeController.js";
-import checkAuth from "./utils/checkAuth.js";
+} from "../controllers/TimeController.js";
+import checkAuth from "../utils/checkAuth.js";
 
 const app = express();
 
@@ -66,3 +66,5 @@ app.listen(process.env.PORT, (error) => {
   }
   console.log("Server OK");
 });
+
+export default app;
