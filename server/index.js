@@ -66,5 +66,3 @@ app.listen(process.env.PORT, (error) => {
   }
   console.log("Server OK");
 });
-
-export default app;
