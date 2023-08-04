@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "api/index.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon api/index.js",
+    "start": "nodemon app.js",
     "vercel-build": "echo hello"
   },
   "keywords": [],
