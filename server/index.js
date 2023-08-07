@@ -20,39 +20,39 @@ import {
 } from "./controllers/TimeController.js";
 import checkAuth from "./utils/checkAuth.js";
 
-const index = express();
+const app = express();
 
 //MIDDLEWARES
 dotenv.config();
-index.use(express.json());
-index.use(cors());
+app.use(express.json());
+app.use(cors());
 
 //ROUTES
 
 //versel test
-index.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Express on Vercel");
 });
 
 //register user
-index.post(
+app.post(
   "/auth/register",
   registerValidation,
   handleValidationErrors,
   register
 );
 //login user
-index.post("/auth/login", loginValidation, handleValidationErrors, login);
+app.post("/auth/login", loginValidation, handleValidationErrors, login);
 //get user info
-index.get("/auth/me", checkAuth, getMe);
+app.get("/auth/me", checkAuth, getMe);
 //add time interval for a user
-index.post("/users/:userId/time-intervals", saveTimeInterval);
+app.post("/users/:userId/time-intervals", saveTimeInterval);
 //delete time intervals
-index.delete("/users/:userId/time-intervals", deleteTimeInterval);
+app.delete("/users/:userId/time-intervals", deleteTimeInterval);
 //get the total time of a user
-index.get("/users/:userId/time-intervals", getIntervals);
+app.get("/users/:userId/time-intervals", getIntervals);
 //get all users
-index.get("/users", getAllUsers);
+app.get("/users", getAllUsers);
 
 //CONNECT TO DB
 mongoose
@@ -60,11 +60,11 @@ mongoose
   .then(() => console.log("DB OK"))
   .catch((err) => console.log("DB error", err));
 
-index.listen(process.env.PORT, (error) => {
+app.listen(process.env.PORT, (error) => {
   if (error) {
     console.log(error);
   }
   console.log("Server OK");
 });
 
-export default index;
+export default app;
