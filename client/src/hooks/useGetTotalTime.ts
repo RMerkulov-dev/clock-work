@@ -7,7 +7,7 @@ const useGetTotalTime = (userId: string) => {
   const queryKey: QueryKey = ["totalTime", userId];
 
   return useQuery<TimesInterval>(queryKey, async () => {
-    const response = await apiClient.get(`/users/${userId}/time-intervals`);
+    const response = await apiClient.get(`/api/users/${userId}/time-intervals`);
     return response.data;
   });
 };

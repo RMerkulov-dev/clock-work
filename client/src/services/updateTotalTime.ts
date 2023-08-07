@@ -5,6 +5,6 @@ export const updateTotalTime = async (userId: string | null, data: number) => {
     return null;
   }
 
-  const res = await apiClient.put(`/users/${userId}/total-time`, data);
+  const res = await apiClient.put(`/api/users/${userId}/total-time`, data);
   return res.data;
 };

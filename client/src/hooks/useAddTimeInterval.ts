@@ -15,7 +15,10 @@ const useAddTimeInterval = (userId: string) => {
       };
       console.log(formattedData);
 
-      return apiClient.post(`/users/${userId}/time-intervals`, formattedData);
+      return apiClient.post(
+        `/api/users/${userId}/time-intervals`,
+        formattedData
+      );
     },
     {
       onMutate: async (variables) => {

@@ -5,7 +5,7 @@ const useDeleteTimeInterval = (userId: string) => {
     try {
       setUserHeader(localStorage.getItem("token"));
 
-      await apiClient.delete(`/users/${userId}/time-intervals`, {
+      await apiClient.delete(`/api/users/${userId}/time-intervals`, {
         data: { intervalId },
       });
     } catch (error) {

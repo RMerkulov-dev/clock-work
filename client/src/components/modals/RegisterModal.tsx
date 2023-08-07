@@ -27,7 +27,7 @@ const RegisterModal = () => {
     },
   });
   const registerUserMutation = useMutation((data) =>
-    apiClient.post("/auth/register", data)
+    apiClient.post("/api/auth/register", data)
   );
   const onSubmit = (data: any) => {
     registerUserMutation

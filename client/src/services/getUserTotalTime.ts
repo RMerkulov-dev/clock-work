@@ -5,6 +5,6 @@ export const getTotalTime = async (userId: string | null) => {
     return null;
   }
 
-  const res = await apiClient.get(`/users/${userId}/total-time`);
+  const res = await apiClient.get(`/api/users/${userId}/total-time`);
   return res.data;
 };

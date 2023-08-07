@@ -33,7 +33,7 @@ const LoginModal = () => {
   });
 
   const loginUserMutation = useMutation((data) =>
-    apiClient.post("/auth/login", data)
+    apiClient.post("/api/auth/login", data)
   );
   const onSubmit = (data: any) => {
     loginUserMutation
