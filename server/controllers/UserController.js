@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import UserModel from "../models/User.js";
 import jwt from "jsonwebtoken";
 
@@ -6,8 +6,8 @@ export const register = async (req, res) => {
   try {
     //protect password
     const password = req.body.password;
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
+    const salt = await bcrypt.genSaltSync(10);
+    const hash = await bcrypt.hashSync(password, salt);
 
     //create user
     const doc = new UserModel({
@@ -53,7 +53,7 @@ export const login = async (req, res) => {
       });
     }
 
-    const isValidPass = await bcrypt.compare(
+    const isValidPass = await bcrypt.compareSync(
       req.body.password,
       user._doc.passwordHash
     );
