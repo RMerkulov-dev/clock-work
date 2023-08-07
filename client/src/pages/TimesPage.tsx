@@ -50,7 +50,7 @@ const TimesPage = () => {
   return (
     <div className="container">
       <Header />
-      <div className="flex sm:flex-col md:flex-row gap-3 mt-3">
+      <div className="flex xs:flex-col md:flex-row gap-3 mt-3">
         <div className="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl drop-shadow-lg w-full p-4 ">
           {/*@ts-ignore*/}
           <AddTimes />

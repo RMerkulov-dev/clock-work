@@ -51,17 +51,18 @@ const UserTotalTime = () => {
     }
   };
 
+  console.log(dayIntervals);
+
   return (
     <div className="rounded-xl p-1">
       <h2 className="text-2xl text-amber-100">Time Intervals:</h2>
 
       <ul className=" h-[200px] overflow-auto rounded-xl border-[1px] border-amber-100 border-opacity-95 py-2 px-3 mt-2  ">
-        {!data ||
-          (data.intervals.length === 0 && (
-            <p className="text-xl text-amber-400 opacity-4 ">
-              You didn't work today, bro!
-            </p>
-          ))}
+        {!dayIntervals.length && (
+          <p className="  text-xl text-amber-400 opacity-4 w-full h-full flex items-center justify-center">
+            You didn't work today, bro!
+          </p>
+        )}
         {/*@ts-ignore*/}
         {dayIntervals.map((interval) => (
           <li key={interval._id} className="flex items-center justify-between">
