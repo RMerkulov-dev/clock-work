@@ -2,6 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
+import { registerValidation } from "../validations/validation.js";
+import handleValidationErrors from "../utils/handleValidationErrors.js";
+import { register } from "../controllers/UserController.js";
 
 const app = express();
 
@@ -19,12 +22,12 @@ app.get("/api", (req, res) => {
 });
 
 // register user
-// app.post(
-//   "/api/auth/register",
-//   registerValidation,
-//   handleValidationErrors,
-//   register
-// );
+app.post(
+  "/api/auth/register",
+  registerValidation,
+  handleValidationErrors,
+  register
+);
 // //login user
 // app.post("/api/auth/login", loginValidation, handleValidationErrors, login);
 // //get user info
