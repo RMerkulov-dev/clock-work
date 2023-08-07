@@ -1,5 +1,6 @@
 import React from "react";
 import { ButtonProps } from "../../../typing";
+import Loader from "./Loader";
 
 const Button = ({
   label,
@@ -34,7 +35,7 @@ const Button = ({
         ${small ? "border-0" : "border-0"}
   `}
     >
-      {label}
+      {disabled ? <Loader label={label} /> : label}
     </button>
   );
 };

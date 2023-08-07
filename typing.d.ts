@@ -32,6 +32,10 @@ interface ModalProps{
     secondaryActionLabel?: string;
 }
 
+interface LoaderProps{
+    label:string
+}
+
 interface AuthProps{
     isLogin:boolean;
     onLogin:()=>void;

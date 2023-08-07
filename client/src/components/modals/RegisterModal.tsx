@@ -30,6 +30,7 @@ const RegisterModal = () => {
     apiClient.post("/api/auth/register", data)
   );
   const onSubmit = (data: any) => {
+    setIsLoading(true);
     registerUserMutation
       .mutateAsync(data)
       .then((response) => {
@@ -40,7 +41,7 @@ const RegisterModal = () => {
         toast.success("Success!");
         registerModal.onClose();
         loginModal.onOpen();
-        console.log(data);
+        setIsLoading(false);
       })
       .catch((err) => {
         toast.error("Something went wrong");
