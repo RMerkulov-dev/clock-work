@@ -2,9 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
-import { registerValidation } from "../validations/validation.js";
-import handleValidationErrors from "../utils/handleValidationErrors.js";
-import { register } from "../controllers/UserController.js";
+import { saveTimeInterval } from "../controllers/TimeController.js";
 
 const app = express();
 
@@ -22,18 +20,18 @@ app.get("/api", (req, res) => {
 });
 
 // register user
-app.post(
-  "/api/auth/register",
-  registerValidation,
-  handleValidationErrors,
-  register
-);
+// app.post(
+//   "/api/auth/register",
+//   registerValidation,
+//   handleValidationErrors,
+//   register
+// );
 // //login user
 // app.post("/api/auth/login", loginValidation, handleValidationErrors, login);
 // //get user info
 // app.get("/api/auth/me", checkAuth, getMe);
 // //add time interval for a user
-// app.post("/api/users/:userId/time-intervals", saveTimeInterval);
+app.post("/api/users/:userId/time-intervals", saveTimeInterval);
 // //delete time intervals
 // app.delete("/api/users/:userId/time-intervals", deleteTimeInterval);
 // //get the total time of a user
