@@ -37,23 +37,23 @@ app.get("/api", (req, res) => {
 
 // register user
 app.post(
-  "/auth/register",
+  "/api/auth/register",
   registerValidation,
   handleValidationErrors,
   register
 );
 //login user
-app.post("/auth/login", loginValidation, handleValidationErrors, login);
+app.post("/api/auth/login", loginValidation, handleValidationErrors, login);
 //get user info
-app.get("/auth/me", checkAuth, getMe);
+app.get("/api/auth/me", checkAuth, getMe);
 //add time interval for a user
-app.post("/users/:userId/time-intervals", saveTimeInterval);
+app.post("/api/users/:userId/time-intervals", saveTimeInterval);
 //delete time intervals
-app.delete("/users/:userId/time-intervals", deleteTimeInterval);
+app.delete("/api/users/:userId/time-intervals", deleteTimeInterval);
 //get the total time of a user
-app.get("/users/:userId/time-intervals", getIntervals);
+app.get("/api/users/:userId/time-intervals", getIntervals);
 //get all users
-app.get("/users", getAllUsers);
+app.get("/api/users", getAllUsers);
 
 //CONNECT TO DB
 mongoose
