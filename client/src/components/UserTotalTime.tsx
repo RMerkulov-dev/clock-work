@@ -8,8 +8,11 @@ import { BiSolidCircle } from "react-icons/bi";
 import useDeleteTimeInterval from "../hooks/useDeleteInterval";
 import { useQueryClient } from "@tanstack/react-query";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { PuffLoader } from "react-spinners";
+import { useLoading } from "../hooks/useLoading";
 
 const UserTotalTime = () => {
+  const loading = useLoading();
   const currentDate = new Date().toISOString().slice(0, 10);
   const { userId, token } = useAuthStore();
   const queryClient = useQueryClient();
@@ -26,7 +29,12 @@ const UserTotalTime = () => {
   const { data, isLoading, error } = useGetTotalTime(userId);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        loading
+        <PuffLoader color="#D97706" size={25} />
+      </div>
+    );
   }
 
   if (error) {
@@ -42,22 +50,22 @@ const UserTotalTime = () => {
   const { deleteTimeInterval } = useDeleteTimeInterval(userId);
 
   const handleDelete = async (intervalId: string) => {
+    loading.onLoadingStart();
     try {
       await deleteTimeInterval(intervalId);
       await queryClient.invalidateQueries(["totalTime", userId]);
       toast.success("Interval deleted successfully");
+      loading.onLoadingFinish();
     } catch (error) {
       toast.error("Error deleting time interval");
     }
   };
 
-  console.log(dayIntervals);
-
   return (
-    <div className="rounded-xl p-1">
+    <div className=" rounded-xl p-1 z-10 ">
       <h2 className="text-2xl text-amber-100">Time Intervals:</h2>
 
-      <ul className=" h-[200px] overflow-auto rounded-xl border-[1px] border-amber-100 border-opacity-95 py-2 px-3 mt-2  ">
+      <ul className="relative h-[200px] overflow-auto rounded-xl border-[1px] border-amber-100 border-opacity-95 py-2 px-3 mt-2  ">
         {!dayIntervals.length && (
           <p className="  text-xl text-amber-400 opacity-4 w-full h-full flex items-center justify-center">
             You didn't work today, bro!
@@ -82,8 +90,12 @@ const UserTotalTime = () => {
             />
           </li>
         ))}
+        {loading.isLoading && (
+          <div className="absolute left-0 top-0 w-full h-full -z-10 flex items-center justify-center bg-amber-600 opacity-30">
+            <PuffLoader color="white" />
+          </div>
+        )}
       </ul>
-      <div> </div>
     </div>
   );
 };

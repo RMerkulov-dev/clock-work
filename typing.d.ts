@@ -10,6 +10,12 @@ interface ModalStore{
     onClose:()=>void;
 }
 
+interface LoadingStore{
+    isLoading:boolean;
+    onLoadingStart:()=> void;
+    onLoadingFinish:()=>void;
+}
+
 interface ButtonProps{
     label: string;
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -30,6 +36,10 @@ interface ModalProps{
     disabled?: boolean;
     secondaryAction?: () => void;
     secondaryActionLabel?: string;
+}
+
+interface LoaderProps{
+    label:string
 }
 
 interface AuthProps{

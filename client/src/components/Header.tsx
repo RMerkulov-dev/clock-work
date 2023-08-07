@@ -5,6 +5,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../helpers/routes";
+import { BeatLoader } from "react-spinners";
 
 const Header = () => {
   const { data, isLoading, isError } = useUserInfo();
@@ -13,11 +14,14 @@ const Header = () => {
   const { home } = routes;
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-end mr-3">
+        <BeatLoader color="#D97706" />
+      </div>
+    );
   }
 
   if (isError) {
-    toast.error("Error fetching user info");
     return <Avatar size="30" round color="#c46f2d" />;
   }
 

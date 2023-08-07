@@ -36,6 +36,7 @@ const LoginModal = () => {
     apiClient.post("/api/auth/login", data)
   );
   const onSubmit = (data: any) => {
+    setIsLoading(true);
     loginUserMutation
       .mutateAsync(data)
       .then((response) => {
@@ -45,7 +46,7 @@ const LoginModal = () => {
         toast.success("Success!");
         registerModal.onClose();
         loginModal.onOpen();
-        console.log(data);
+        setIsLoading(false);
         // @ts-ignore
         isLogin.onLogin();
         navigate(times);

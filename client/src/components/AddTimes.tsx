@@ -6,8 +6,10 @@ import { Button, Input } from "./index";
 import { format, parseISO } from "date-fns";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useLoading } from "../hooks/useLoading";
 
 const AddTimes = () => {
+  const loading = useLoading();
   const { userId } = useAuthStore();
   const queryClient = useQueryClient();
   const {
@@ -22,15 +24,17 @@ const AddTimes = () => {
       description: "",
     },
   });
+
   if (!userId) {
     return toast.error("No ID available");
   }
   const addTimeIntervalMutation = useAddTimeInterval(userId);
-
+  console.log("loading", loading);
   const onSubmit = async (data: any) => {
-    // Extract the time value from the input
-    const startTimeValue = data.startTime; // Format: "hh:mm"
-    const endTimeValue = data.endTime; // Format: "hh:mm"
+    loading.onLoadingStart();
+
+    const startTimeValue = data.startTime;
+    const endTimeValue = data.endTime;
     const description = data.description;
 
     // Create Date objects with the current date and the extracted time values
@@ -52,6 +56,7 @@ const AddTimes = () => {
       reset();
       await queryClient.invalidateQueries(["totalTime", userId]);
       toast.success("Success");
+      loading.onLoadingFinish();
     } catch (error) {
       console.error("Error saving time interval:", error);
       toast.error("Error:(");
@@ -85,7 +90,11 @@ const AddTimes = () => {
         required
       />
 
-      <Button label="ADD" onClick={handleSubmit(onSubmit)}></Button>
+      <Button
+        disabled={loading.isLoading}
+        label="ADD"
+        onClick={handleSubmit(onSubmit)}
+      ></Button>
     </form>
   );
 };
