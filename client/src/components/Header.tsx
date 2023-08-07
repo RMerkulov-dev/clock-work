@@ -31,8 +31,8 @@ const Header = () => {
   };
   return (
     <div className="flex items-center justify-end gap-4">
-      <p className="text-l text-amber-100">{`Hello ${fullName}`}</p>
-      <Avatar size="30" round name={fullName} color="#c46f2d" />
+      <p className="text-l text-amber-100">{`Hello ${fullName || ""}`}</p>
+      <Avatar size="30" round name={fullName || ""} color="#c46f2d" />
       <AiOutlineLogout
         size={30}
         className="text-amber-500 cursor-pointer"
