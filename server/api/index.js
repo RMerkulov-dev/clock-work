@@ -7,10 +7,6 @@ import {
   login,
   register,
 } from "../controllers/UserController.js";
-import {
-  loginValidation,
-  registerValidation,
-} from "../validations/validation.js";
 import handleValidationErrors from "../utils/handleValidationErrors.js";
 import checkAuth from "../utils/checkAuth.js";
 import mongoose from "mongoose";
@@ -38,12 +34,12 @@ app.get("/api", (req, res) => {
 // register user
 app.post(
   "/api/auth/register",
-  registerValidation,
+  // registerValidation,
   handleValidationErrors,
   register
 );
 //login user
-app.post("/api/auth/login", loginValidation, handleValidationErrors, login);
+app.post("/api/auth/login", handleValidationErrors, login);
 //get user info
 app.get("/api/auth/me", checkAuth, getMe);
 //add time interval for a user
