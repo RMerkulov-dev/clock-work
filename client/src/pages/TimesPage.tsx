@@ -21,7 +21,7 @@ const TimesPage = () => {
   const { data, isLoading, error } = useGetTotalTime(userId);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   if (error) {
