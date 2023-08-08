@@ -21,8 +21,10 @@ const Input = ({
         type={type}
         className={`
        peer
-          w-full
-          h-full
+          xs:w-[290px]
+          xs:h-[70px]
+          md:w-full
+          md:h-full
           p-4
           pt-6 
           font-light 
