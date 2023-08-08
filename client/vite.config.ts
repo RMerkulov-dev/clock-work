@@ -3,6 +3,7 @@ import { resolve } from "path";
 import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
+//new config
 export default defineConfig({
   build: {
     rollupOptions: {
