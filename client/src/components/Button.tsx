@@ -21,7 +21,8 @@ const Button = ({
         rounded-xl
         hover:opacity-80
         transition
-        w-full
+        xs:w-[290px]
+        md:w-full
         ${
           outline
             ? "bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg"
