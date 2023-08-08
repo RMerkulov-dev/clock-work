@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://clock-work-server.vercel.app";
+// const BASE_URL = "https://clock-work-server.vercel.app";
+const BASE_URL = "http://localhost:3004";
 
 const apiClient = axios.create({ baseURL: BASE_URL });
 

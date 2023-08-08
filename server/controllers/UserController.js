@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import UserModel from "../models/User.js";
 import jwt from "jsonwebtoken";
+import { sendWelcomeEmail } from "../jobs/sendEmail.js";
 
 export const register = async (req, res) => {
   try {
@@ -19,6 +20,8 @@ export const register = async (req, res) => {
 
     //save user to DB
     const user = await doc.save();
+    // Send welcome email
+    await sendWelcomeEmail(user.email, user.fullName);
     const token = jwt.sign(
       {
         _id: user.id,
