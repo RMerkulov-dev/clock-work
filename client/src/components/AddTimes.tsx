@@ -83,7 +83,7 @@ const AddTimes = () => {
       />
       <Input
         id="endTime"
-        label=""
+        label="End Time (hh:mm)"
         type="time"
         register={register}
         errors={errors}
