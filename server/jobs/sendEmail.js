@@ -24,7 +24,7 @@ async function sendWelcomeEmail(recipientEmail, fullName) {
         <p>Hi ${fullName}!</p>
         <p>Welcome to Clockwork Activity!</p>
         <p>This cool app was made to train my skills in the MERN stack, and I hope you enjoy it.</p>
-<!--        <p>To get to know me, go to my <a href="https://roman-merkulov-resume-2.netlify.app/">portfolio</a>.</p>-->
+        <p>To get to know me, go to my <a href="https://roman-merkulov-resume-2.netlify.app/">portfolio</a>.</p>
       `,
     });
   } catch (err) {
