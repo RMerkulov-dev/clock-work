@@ -19,8 +19,27 @@ import {
   register,
 } from "../controllers/UserController.js";
 import checkAuth from "../utils/checkAuth.js";
+import Bree from "bree";
 
 const app = express();
+
+const bree = new Bree({
+  jobs: [
+    {
+      name: "sendEmail",
+      cron: "* * * * *",
+      worker: {
+        workerData: {
+          description: "This job will send emails.",
+        },
+      },
+    },
+  ],
+});
+
+bree.start();
+
+//Sending email
 
 //MIDDLEWARES
 dotenv.config();
