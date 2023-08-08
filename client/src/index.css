@@ -11,3 +11,7 @@ body{
     color: #290536;
     margin-right: 10px;
 }
+input[type="time"]{
+    width: 100%;
+    height: 100%;
+}
