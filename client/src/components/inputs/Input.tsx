@@ -22,6 +22,7 @@ const Input = ({
         className={`
        peer
           w-full
+          h-full
           p-4
           pt-6 
           font-light 

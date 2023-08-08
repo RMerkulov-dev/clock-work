@@ -105,7 +105,6 @@ const LoginModal = () => {
               hover:underline
             "
         >
-          {" "}
           Register
         </span>
       </p>
