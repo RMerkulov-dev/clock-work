@@ -20,9 +20,9 @@ const MainPage = () => {
 
   return (
     <>
-      <div className="container  p-5 bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg  h-screen">
-        <div className="flex items-center  flex-col h-full">
-          <div className="">
+      <div className="container  py-10 bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg  h-screen">
+        <div className="flex items-center   flex-col h-full">
+          <div className=" md:mt-6 lg:mt-auto">
             <h1 className="font-extrabold text-transparent xs:text-4xl lg:text-6xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center">
               ClockWork
             </h1>
@@ -34,8 +34,8 @@ const MainPage = () => {
               <br /> Achieve Your Goals
             </h2>
           </div>
-          <ul className="flex items-center justify-center flex-col gap-4 w-full mt-auto ">
-            <li className="xs:w-full md:w-2/4">
+          <ul className="flex items-center justify-center flex-col gap-4 md:w-full mt-auto ">
+            <li className="xs:w-full md:w-2/4 ">
               <Button label="Log in" onClick={handleLoginOpen} />
             </li>
             <li className="xs:w-full md:w-2/4">

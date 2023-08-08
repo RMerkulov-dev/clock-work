@@ -21,7 +21,7 @@ const Button = ({
         rounded-xl
         hover:opacity-80
         transition
-        xs:w-[290px]
+        xs:w-[280px]
         md:w-full
         ${
           outline
