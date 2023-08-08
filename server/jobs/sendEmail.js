@@ -16,7 +16,6 @@ async function sendWelcomeEmail(recipientEmail, fullName) {
       },
     });
 
-    // Email configuration
     await transporter.sendMail({
       from: "clockworkactivity@outlook.com",
       to: recipientEmail,
