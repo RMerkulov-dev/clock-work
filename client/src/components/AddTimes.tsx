@@ -64,38 +64,40 @@ const AddTimes = () => {
   };
 
   return (
-    <form className="flex flex-col items-center justify-center gap-4">
-      <Input
-        id="description" // Add the description input
-        label="Description"
-        type="text"
-        register={register}
-        errors={errors}
-        required
-      />
-      <Input
-        id="startTime"
-        label="Start Time "
-        type="time"
-        register={register}
-        errors={errors}
-        required
-      />
-      <Input
-        id="endTime"
-        label="End Time "
-        type="time"
-        register={register}
-        errors={errors}
-        required
-      />
+    <div>
+      <form className="flex flex-col items-center justify-center gap-4">
+        <Input
+          id="description" // Add the description input
+          label="Description"
+          type="text"
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="startTime"
+          label="Start Time "
+          type="time"
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="endTime"
+          label="End Time "
+          type="time"
+          register={register}
+          errors={errors}
+          required
+        />
 
-      <Button
-        disabled={loading.isLoading}
-        label="ADD"
-        onClick={handleSubmit(onSubmit)}
-      ></Button>
-    </form>
+        <Button
+          disabled={loading.isLoading}
+          label="ADD"
+          onClick={handleSubmit(onSubmit)}
+        ></Button>
+      </form>
+    </div>
   );
 };
 
