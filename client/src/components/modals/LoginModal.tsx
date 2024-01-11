@@ -73,6 +73,7 @@ const LoginModal = () => {
         subtitle="Please Log in to your account"
       />
       <Input
+        data-testid="email-input"
         id="email"
         label="Email"
         disabled={isLoading}
@@ -82,6 +83,7 @@ const LoginModal = () => {
       />
 
       <Input
+        data-testid="password-input"
         id="password"
         type="password"
         label="Password"
