@@ -10,8 +10,10 @@ vi.mock("../stores/authStore", () => ({
 describe("AddTime render", () => {
   it("render form fields and buttons", () => {
     const queryClient = new QueryClient();
+
     render(
       <QueryClientProvider client={queryClient}>
+        {/*@ts-ignore*/}
         <AddTimes />
       </QueryClientProvider>
     );
